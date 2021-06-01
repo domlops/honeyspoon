@@ -65,7 +65,12 @@ function HomeScreen({ history }) {
               </Col>
             ))}
           </Row>
-          <Paginate page={page} pages={pages} keyword={keyword} />
+          <Paginate
+            page={page}
+            pages={pages}
+            keyword={keyword}
+            is_staff={false}
+          />
         </div>
       )}
     </div>
