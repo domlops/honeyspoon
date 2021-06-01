@@ -1,0 +1,70 @@
+.link {
+  color: #c5212d;
+}
+.link:hover {
+  color: #9c1720;
+}
+
+main {
+  min-height: 80vh;
+}
+
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+
+h3 {
+  padding: 1rem 0;
+}
+
+.rating span {
+  margin: 0.1rem;
+}
+
+#lb {
+  white-space: pre-line;
+  line-height: 2px;
+}
+
+#honey {
+  color: #c5212d;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+}
+
+#dropdown-danger {
+  color: #d9534f;
+}
+
+#footer-p {
+  color: #eea9ad;
+}
+
+#about-text {
+  font-size: larger;
+  font-weight: 200;
+}
+
+p {
+  text-align: justify;
+}
