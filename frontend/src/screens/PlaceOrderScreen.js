@@ -25,6 +25,9 @@ function PlaceOrderScreen({ history }) {
   const coupon = useSelector((state) => state.coupon);
   const { error: couponError, success: couponSuccess } = coupon;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   cart.itemsPrice = cart.cartItems
     .reduce(
       (acc, item) =>
@@ -38,15 +41,22 @@ function PlaceOrderScreen({ history }) {
     .toFixed(2);
 
   if (cart.shippingAddress.cidade === "Maceió") {
-    cart.shippingPrice = (
-      cart.itemsPrice > 150 ? (0).toFixed(2) : (10).toFixed(2)
-    ).toFixed(2);
+    cart.shippingPrice =
+      cart.itemsPrice > 150 ? (0).toFixed(2) : (10).toFixed(2);
   } else {
     cart.shippingPrice = (15).toFixed(2);
   }
-  cart.totalPrice = (
-    Number(cart.itemsPrice) + Number(cart.shippingPrice)
-  ).toFixed(2);
+  cart.totalPrice = userInfo.is_honey_first
+    ? (
+        Number(cart.itemsPrice) -
+        Number(cart.itemsPrice) * 0.2 +
+        Number(cart.shippingPrice)
+      ).toFixed(2)
+    : (
+        Number(cart.itemsPrice) -
+        Number(cart.itemsPrice) * 0.1 +
+        Number(cart.shippingPrice)
+      ).toFixed(2);
 
   if (!cart.paymentMethod) {
     history.push("/payment");
@@ -92,11 +102,8 @@ function PlaceOrderScreen({ history }) {
               <h2>Entrega</h2>
               <p>
                 <strong>Endereço de Entrega: </strong>
-                {cart.shippingAddress.endereço},{" "}
-                {cart.shippingAddress.cidade === "Maceió"
-                  ? cart.shippingAddress.bairro.label
-                  : cart.shippingAddress.bairro}
-                , {cart.shippingAddress.cidade}
+                {cart.shippingAddress.endereço}, {cart.shippingAddress.bairro},{" "}
+                {cart.shippingAddress.cidade}
                 {"  "}
                 {cart.shippingAddress.cep}
                 {"  "}
@@ -175,6 +182,12 @@ function PlaceOrderScreen({ history }) {
                 <Row>
                   <Col>Frete:</Col>
                   <Col>R$ {formatPrice(cart.shippingPrice)}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Desconto:</Col>
+                  <Col>{userInfo.is_honey_first ? "- 20%" : "-10%"}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>

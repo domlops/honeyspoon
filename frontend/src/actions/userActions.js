@@ -59,7 +59,7 @@ export const register =
         },
       };
 
-      const { data } = await axios.post(
+      const { data } = await axios.put(
         "/api/users/register/",
         {
           name: name,

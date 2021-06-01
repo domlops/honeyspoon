@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['_id', 'username', 'cpf',
-                  'birthday', 'email', 'phone', 'name', 'is_staff', 'is_honey']
+                  'birthday', 'email', 'phone', 'name', 'is_staff', 'is_honey_first', 'is_honey']
 
     def get__id(self, obj):
         return obj.id
@@ -24,7 +24,7 @@ class UserSerializerWithToken(UserSerializer):
 
     class Meta:
         model = User
-        fields = ['_id', 'username', 'email', 'name', 'cpf', 'phone', 'is_staff', 'is_honey',
+        fields = ['_id', 'username', 'email', 'name', 'cpf', 'phone', 'is_staff', 'is_honey_first', 'is_honey',
                   'is_verified', 'birthday', 'token']
 
     def get_token(self, obj):

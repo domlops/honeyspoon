@@ -13,6 +13,8 @@ function EditUserScreen({ match, history }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [is_staff, setStaff] = useState(false);
+  const [is_honey, setHoney] = useState(false);
+  const [is_honey_first, setFirst] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -33,14 +35,27 @@ function EditUserScreen({ match, history }) {
         setName(user.name);
         setEmail(user.email);
         setStaff(user.is_staff);
+        setHoney(user.is_honey);
+        setFirst(user.is_honey_first);
       }
     }
   }, [dispatch, user, userId, success, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateUser({ _id: user._id, name, email, is_staff }));
+    dispatch(
+      updateUser({
+        _id: user._id,
+        name,
+        email,
+        is_staff,
+        is_honey,
+        is_honey_first,
+      })
+    );
   };
+
+  console.log(is_honey);
   return (
     <div>
       <Link to="/admin/userlist" className="btn btn-outline-danger my-4">
@@ -83,6 +98,24 @@ function EditUserScreen({ match, history }) {
                 label="Administrador"
                 checked={is_staff}
                 onChange={(e) => setStaff(e.target.checked)}
+              ></Form.Check>
+            </Form.Group>
+
+            <Form.Group control="ishoney">
+              <Form.Check
+                type="checkbox"
+                label="Colmeia"
+                checked={is_honey}
+                onChange={(e) => setHoney(e.target.checked)}
+              ></Form.Check>
+            </Form.Group>
+
+            <Form.Group control="isfirst">
+              <Form.Check
+                type="checkbox"
+                label="Colmeia 1º Mês"
+                checked={is_honey_first}
+                onChange={(e) => setFirst(e.target.checked)}
               ></Form.Check>
             </Form.Group>
 

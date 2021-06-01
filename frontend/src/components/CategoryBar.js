@@ -14,10 +14,8 @@ function CategoryBar() {
   const bar = () => {
     if (shop) {
       setShop(false);
-      console.log(shop);
     } else {
       setShop(true);
-      console.log(shop);
     }
   };
 
@@ -33,7 +31,10 @@ function CategoryBar() {
           />
         </Nav.Link>
 
-        <Nav.Link href="#">
+        <Nav.Link
+          href="https://portal.masterlove.com.br/profissional/1620876086819x131650251047305220"
+          target="_blank"
+        >
           <img
             src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/mlove.png"
             width="100"
@@ -42,7 +43,7 @@ function CategoryBar() {
           />
         </Nav.Link>
 
-        <Nav.Link href="#">
+        <Nav.Link href="#/inciclo">
           <img
             src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/inciclo.png"
             width="100"
@@ -51,7 +52,7 @@ function CategoryBar() {
           />
         </Nav.Link>
 
-        <Nav.Link href="/colmeia">
+        <Nav.Link href="#/colmeia">
           <img
             src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/Colmeia+Neon.svg"
             width="100"
@@ -60,7 +61,7 @@ function CategoryBar() {
           />
         </Nav.Link>
 
-        <Nav.Link href="#">
+        <Nav.Link href="#/aroma-honeyspoon">
           <img
             src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/Chocolates.svg"
             width="100"

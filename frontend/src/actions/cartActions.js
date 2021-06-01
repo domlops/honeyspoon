@@ -8,7 +8,8 @@ export const addToCart = (id, vary) => async (dispatch, getState) => {
     payload: {
       product: data._id,
       name: data.name,
-      variation: data.variations[vary - 1],
+      index: vary,
+      variation: data.variations[vary],
       qty: 1,
     },
   });
@@ -24,7 +25,8 @@ export const addSameItem = (id, vary, nqty) => async (dispatch, getState) => {
     payload: {
       product: data._id,
       name: data.name,
-      variation: data.variations[vary - 1],
+      index: vary,
+      variation: data.variations[vary],
       qty: nqty,
     },
   });

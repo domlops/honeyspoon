@@ -21,7 +21,7 @@ import {
 function ProductScreen({ match, history }) {
   const productId = match.params.id;
 
-  const [vary, setVary] = useState(1);
+  const [vary, setVary] = useState(0);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
@@ -69,6 +69,8 @@ function ProductScreen({ match, history }) {
       return price.replace(".", ",");
     }
   };
+
+  console.log(vary);
 
   return (
     <div>
@@ -140,8 +142,8 @@ function ProductScreen({ match, history }) {
                             value={vary}
                             onChange={(e) => setVary(e.target.value)}
                           >
-                            {product.variations.map((variation) => (
-                              <option key={variation.name} value={variation.id}>
+                            {product.variations.map((variation, index) => (
+                              <option key={variation.name} value={index}>
                                 {variation.name}
                               </option>
                             ))}
@@ -152,7 +154,7 @@ function ProductScreen({ match, history }) {
                             onClick={addToCartHandler}
                             className="text-danger btn-block"
                             disabled={
-                              product.variations[vary - 1].countInStock < 1
+                              product.variations[vary].countInStock < 1
                                 ? true
                                 : false
                             }

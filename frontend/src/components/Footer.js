@@ -4,7 +4,7 @@ import { Card, Container, Row, Col, CardGroup } from "react-bootstrap";
 function Footer() {
   return (
     <footer>
-      <Container>
+      <Container className="justify-content-md-center">
         <CardGroup>
           <Card
             className="text-white bg-primary p-3"
@@ -12,15 +12,15 @@ function Footer() {
           >
             <Card.Title id="footer-p">Institucional</Card.Title>
             <Card.Text></Card.Text>
-            <Card.Link className="link" href="/inst/about">
+            <Card.Link className="link" href="#/inst/about">
               Sobre Nós
             </Card.Link>
             <Card.Text></Card.Text>
-            <Card.Link className="link" href="/inst/troca">
+            <Card.Link className="link" href="#/inst/troca">
               Politica de Troca
             </Card.Link>
             <Card.Text></Card.Text>
-            <Card.Link className="link" href="/inst/logistica">
+            <Card.Link className="link" href="#/inst/logistica">
               Logistica Reversa
             </Card.Link>
           </Card>
@@ -31,7 +31,11 @@ function Footer() {
           >
             <Card.Title id="footer-p">Videos</Card.Title>
             <Card.Text></Card.Text>
-            <Card.Link className="link" href="" target="_blank">
+            <Card.Link
+              className="link"
+              href="https://www.instagram.com/tv/COLtgAzl3pS/?utm_medium=copy_link"
+              target="_blank"
+            >
               Falando sobre coletor menstrual
             </Card.Link>
             <Card.Text></Card.Text>

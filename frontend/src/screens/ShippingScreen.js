@@ -13,17 +13,14 @@ function ShippingScreen({ history }) {
   const { shippingAddress } = cart;
   const dispatch = useDispatch();
 
-  const cidades = [
-    { value: "Maceió", label: "Maceió" },
-    { value: "Rio Largo", label: "Rio Largo" },
-    { value: "Satuba", label: "Satuba" },
-    { value: "Marechal", label: "Marechal Deodoro" },
-  ];
-
   const [endereço, setEndereço] = useState(shippingAddress.endereço);
-  const [cidade, setCidade] = useState(shippingAddress.cidade);
+  const [cidade, setCidade] = useState(
+    shippingAddress.cidade ? shippingAddress.cidade : "Maceió"
+  );
   const [cep, setCEP] = useState(shippingAddress.cep);
-  const [bairro, setBairro] = useState(shippingAddress.bairro);
+  const [bairro, setBairro] = useState(
+    shippingAddress.bairro ? shippingAddress.bairro : "Antares"
+  );
   const [ponto, setPonto] = useState("");
   const [complemento, setComplemento] = useState("");
 

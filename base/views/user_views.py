@@ -27,7 +27,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 def registerUser(request):
     data = request.data
     age = Age(data['birthday'])
@@ -108,11 +108,14 @@ def updateUser(request, pk):
     user = User.objects.get(id=pk)
 
     data = request.data
+    print(data)
 
     user.name = data['name']
     user.username = data['email']
     user.email = data['email']
     user.is_staff = data['is_staff']
+    user.is_honey = data['is_honey']
+    user.is_honey_first = data['is_honey_first']
 
     user.save()
 

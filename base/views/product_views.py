@@ -14,6 +14,7 @@ from base.serializers import ProductSerializer, VariationSerializer
 @api_view(['GET'])
 def getProducts(request):
     query = request.query_params.get('search')
+
     if query == None:
         query = ''
 

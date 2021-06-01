@@ -69,3 +69,46 @@ export const Cidades = [
   "Satuba",
   "Santa Luzia do Norte",
 ];
+
+export const Colmeia = [
+  {
+    name: "Pólen",
+    price: "89,90",
+    description: "Caixa Temática Mensal",
+    link: "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808479c587da0179c91fd87b0391",
+  },
+  {
+    name: "Favo",
+    price: "129,90",
+    description: "Receba Mensalmente uma Caixa Personalizada",
+    link: "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808479abf8700179b144374901d9",
+  },
+  {
+    name: "Abelha (Semestral)",
+    price: "119,90",
+    disc: "(6 x 119,90)",
+    description: " Receba seis Caixas Personalizada",
+    link: "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808479c587f30179c92462bd0340",
+  },
+  {
+    name: "Abelha",
+    price: "119,90",
+    disc: "(6 x 119,90)",
+    description: " Receba seis Caixas Personalizada em meses alternados",
+    link: "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808479c587f30179c9237c57033d",
+  },
+  {
+    name: "Abelha Rainha",
+    price: "119,90",
+    disc: "(12 x 119,90)",
+    description: "Receba 12 Caixas Personalizada ao longo do ano",
+    link: "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808479c587bf0179c9254eb20347",
+  },
+  {
+    name: "Melaço",
+    price: "109,90",
+    disc: "(1 x 1209,90)",
+    description: " Pague por 11 caixas e receba 12! :D",
+    link: "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808479c587f30179c925d7f90344",
+  },
+];

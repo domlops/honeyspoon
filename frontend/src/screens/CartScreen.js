@@ -50,6 +50,7 @@ function CartScreen({ match, location, history }) {
     .toFixed(2);
 
   const honeyPrice = (totalPrice - totalPrice * 0.1).toFixed(2);
+  const honeyFirstPrice = (totalPrice - totalPrice * 0.2).toFixed(2);
 
   return (
     <Row>
@@ -91,7 +92,7 @@ function CartScreen({ match, location, history }) {
                         dispatch(
                           addSameItem(
                             item.product,
-                            item.variation.id,
+                            item.index,
                             Number(e.target.value)
                           )
                         )
@@ -142,7 +143,11 @@ function CartScreen({ match, location, history }) {
               <h4>
                 R${" "}
                 {userInfo
-                  ? userInfo.is_honey
+                  ? userInfo.is_honey_first
+                    ? `${totalPrice}
+                  - 20%
+                   = R$ ${honeyFirstPrice.replace(".", ",")}`
+                    : userInfo.is_honey
                     ? `${totalPrice}
                   - 10%
                    = R$ ${honeyPrice.replace(".", ",")}`
