@@ -35,10 +35,10 @@ function CategoryBar() {
 
         <Nav.Link href="#">
           <img
-            src="images/mlove.png"
+            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/mlove.png"
             width="100"
             height="100"
-            alt="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/mlove.png"
+            alt="mlove"
           />
         </Nav.Link>
 

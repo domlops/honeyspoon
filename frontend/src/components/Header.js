@@ -21,7 +21,7 @@ function Header() {
             <Navbar.Brand>
               <img
                 alt=""
-                src="/images/2res.svg"
+                src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/logo-header.svg"
                 width="300"
                 height="30"
                 className=""

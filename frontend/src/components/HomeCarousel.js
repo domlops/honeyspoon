@@ -23,33 +23,45 @@ function HomeCarousel() {
   ) : (
     <Carousel pause="hover" className="bg-dark">
       <Carousel.Item>
-        <Link to="#">
-          <Image className="d-block w-100" src="/images/1.svg" fluid="true" />
+        <Image
+          className="d-block w-100"
+          src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/1.svg"
+          fluid="true"
+        />
+      </Carousel.Item>
+
+      <Carousel.Item>
+        <Link to="/?search=Vibradores&page=1">
+          <Image
+            className="d-block w-100"
+            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/2.svg"
+            fluid="true"
+          />
         </Link>
       </Carousel.Item>
 
       <Carousel.Item>
-        <Link to="#">
-          <Image className="d-block w-100" src="images/2.svg" fluid="true" />
-        </Link>
+        <Image
+          className="d-block w-100"
+          src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/3.svg"
+          fluid="true"
+        />
       </Carousel.Item>
 
       <Carousel.Item>
-        <Link to="#">
-          <Image className="d-block w-100" src="images/5.svg" fluid="true" />
-        </Link>
+        <Image
+          className="d-block w-100"
+          src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/4.svg"
+          fluid="true"
+        />
       </Carousel.Item>
 
       <Carousel.Item>
-        <Link to="#">
-          <Image className="d-block w-100" src="images/4.svg" fluid="true" />
-        </Link>
-      </Carousel.Item>
-
-      <Carousel.Item>
-        <Link to="#">
-          <Image className="d-block w-100" src="images/6.svg" fluid="true" />
-        </Link>
+        <Image
+          className="d-block w-100"
+          src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/6.svg"
+          fluid="true"
+        />
       </Carousel.Item>
     </Carousel>
   );
