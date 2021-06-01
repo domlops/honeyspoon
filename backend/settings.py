@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-b7%z&bo(h+ph*fekvksqned1zah0a!t=gpv!!s6ko2rv4&8yy0
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
-                 'honeyspoon.herokuapp.com', '.herokuapp.com']
+                 'honeyspoon.herokuapp.com', '.herokuapp.com', 'umacolherdemel.com.br', 'www.umacolherdemel.com.br']
 
 AUTH_USER_MODEL = 'base.User'
 
