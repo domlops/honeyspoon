@@ -112,7 +112,6 @@ def updateUser(request, pk):
     user.name = data['name']
     user.username = data['email']
     user.email = data['email']
-    user.phone = data['phone']
     user.is_staff = data['is_staff']
 
     user.save()
