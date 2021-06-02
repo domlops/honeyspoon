@@ -136,7 +136,12 @@ function OrderScreen({ match, history }) {
                   <ListGroup.Item variant="flush">
                     Pague através do QR Code
                   </ListGroup.Item>
-                  <Image src="/images/pix.png" alt="pix" width="250" rounded />
+                  <Image
+                    src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/imagem_2021-06-02_170048.png"
+                    alt="pix"
+                    width="250"
+                    rounded
+                  />
                   <ListGroup.Item
                     action
                     href="https://nubank.com.br/pagar/ox0ih/kWqwsslpx2"
@@ -184,7 +189,9 @@ function OrderScreen({ match, history }) {
                             className="link"
                             to={`/product/${item.product}`}
                           >
-                            {item.name}
+                            {item.type === "U"
+                              ? item.name
+                              : `${item.name} (${item.variation})`}
                           </Link>
                         </Col>
                         <Col md={4}>

@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Message from "../components/Message";
+import Loader from "../components/Loader";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder, checkCoupon } from "../actions/orderActions";
 
@@ -20,7 +21,7 @@ function PlaceOrderScreen({ history }) {
   const [cupom, setCupom] = useState("");
 
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { order, error, success } = orderCreate;
+  const { order, error, loading, success } = orderCreate;
 
   const coupon = useSelector((state) => state.coupon);
   const { error: couponError, success: couponSuccess } = coupon;
@@ -180,14 +181,14 @@ function PlaceOrderScreen({ history }) {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Frete:</Col>
-                  <Col>R$ {formatPrice(cart.shippingPrice)}</Col>
+                  <Col>Desconto:</Col>
+                  <Col>{userInfo.is_honey_first ? "- 20%" : "-10%"}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Desconto:</Col>
-                  <Col>{userInfo.is_honey_first ? "- 20%" : "-10%"}</Col>
+                  <Col>Frete:</Col>
+                  <Col>R$ {formatPrice(cart.shippingPrice)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -231,6 +232,7 @@ function PlaceOrderScreen({ history }) {
                 >
                   Finalizar Pedido
                 </Button>
+                {loading && <Loader />}
               </ListGroup.Item>
             </ListGroup>
           </Card>

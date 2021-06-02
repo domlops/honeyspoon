@@ -54,7 +54,7 @@ def addOrderItems(request):
         )
         for i in orderItems:
             product = Product.objects.get(_id=i['product'])
-            variation = Variation.objects.get(name=i['variation']['name'])
+            variation = Variation.objects.get(id=i['variation']['id'])
             if float(i['variation']['promo_price']) > 0:
                 data_price = i['variation']['promo_price']
             else:
@@ -62,7 +62,9 @@ def addOrderItems(request):
             item = OrderItem.objects.create(
                 product=product,
                 order=order,
-                name=i['variation']['name'],
+                name=product.name,
+                type=product.type,
+                variation=variation.name,
                 qty=i['qty'],
                 price=data_price,
                 image=i['variation']['image'],
