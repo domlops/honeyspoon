@@ -47,7 +47,8 @@ export const logout = () => (dispatch) => {
 };
 
 export const register =
-  (name, cpf, email, phone, birthday, password) => async (dispatch) => {
+  (name, last_name, nickname, cpf, email, phone, birthday, password) =>
+  async (dispatch) => {
     try {
       dispatch({
         type: "USER_REGISTER_REQUEST",
@@ -63,6 +64,8 @@ export const register =
         "/api/users/register/",
         {
           name: name,
+          last_name: last_name,
+          nickname: nickname,
           cpf: cpf,
           email: email,
           phone: phone,

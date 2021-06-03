@@ -62,7 +62,6 @@ function RegisterScreen({ location, history }) {
       );
     }
   };
-  console.log(name, email);
   return (
     <FormContainer>
       <h1>Entre</h1>
