@@ -10,6 +10,8 @@ import { listMyOrders } from "../actions/orderActions";
 
 function ProfileScreen({ history }) {
   const [name, setName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +48,8 @@ function ProfileScreen({ history }) {
         dispatch(listMyOrders());
       } else {
         setName(user.name);
+        setLastName(user.last_name);
+        setNickname(user.nickname);
         setEmail(user.email);
         setPhone(user.phone);
       }
@@ -61,6 +65,8 @@ function ProfileScreen({ history }) {
         updateUserProfile({
           id: user._id,
           name: name,
+          last_name: last_name,
+          nickname: nickname,
           phone: phone,
           email: email,
           password: password,
@@ -85,6 +91,27 @@ function ProfileScreen({ history }) {
               placeholder="Insira seu nome"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="name">
+            <Form.Label>Sobrenome*</Form.Label>
+            <Form.Control
+              required
+              type="name"
+              placeholder="Insira seu sobrenome"
+              value={last_name}
+              onChange={(e) => setLastName(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="name">
+            <Form.Label>Nome Social</Form.Label>
+            <Form.Control
+              type="name"
+              placeholder="Como prefere ser chamado(a)?"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
             ></Form.Control>
           </Form.Group>
 

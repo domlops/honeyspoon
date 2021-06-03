@@ -14,8 +14,6 @@ import Message from "../components/Message";
 import { addToCart, removeFromCart, addSameItem } from "../actions/cartActions";
 
 function CartScreen({ match, location, history }) {
-  const productId = match.params.id;
-  const vary = location.search ? Number(location.search.split("=")[1]) : 1;
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -23,12 +21,6 @@ function CartScreen({ match, location, history }) {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  useEffect(() => {
-    if (productId) {
-      dispatch(addToCart(productId, vary));
-    }
-  }, [dispatch, productId, vary]);
 
   const removeFromCartHandler = (pin) => {
     dispatch(removeFromCart(pin));

@@ -8,7 +8,12 @@ import { logout } from "../actions/userActions";
 function Header() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
   const dispatch = useDispatch();
+
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -34,13 +39,19 @@ function Header() {
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link className="text-danger">
+                  <i className="mr-1">
+                    {cartItems.length > 0 ? `${cartItems.length}` : ""}
+                  </i>
                   <i className="fas fa-shopping-cart pr-1 text-danger"></i>
                   Carrinho
                 </Nav.Link>
               </LinkContainer>
 
               {userInfo ? (
-                <NavDropdown id="dropdown-danger" title={userInfo.name}>
+                <NavDropdown
+                  id="dropdown-danger"
+                  title={userInfo.nickname ? userInfo.nickname : userInfo.name}
+                >
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Perfil</NavDropdown.Item>
                   </LinkContainer>

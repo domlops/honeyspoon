@@ -32,8 +32,10 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
-    name = models.CharField(max_length=30)
-    cpf = BRCPFField()
+    name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
+    nickname = models.CharField(max_length=30, null=True, blank=True)
+    cpf = models.CharField(max_length=15)
     email = models.EmailField(max_length=100, unique=True, db_index=True)
     phone = models.CharField(max_length=20, null=True)
     birthday = models.DateField(null=True)

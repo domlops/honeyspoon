@@ -48,7 +48,11 @@ function OrderListScreen({ history }) {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.user && order.user.name}</td>
+                <td>
+                  {order.user.nickname
+                    ? order.user.nickname
+                    : `${order.user.name} ${order.user.last_name}`}
+                </td>
                 <td>{order.createdAt.replace(/-/g, "/")}</td>
                 <td>R$ {order.totalPrice.replace(".", ",")}</td>
                 <td className="text-center">

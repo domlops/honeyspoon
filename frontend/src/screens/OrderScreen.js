@@ -100,7 +100,8 @@ function OrderScreen({ match, history }) {
             <ListGroup.Item>
               <h2>Entrega</h2>
               <p>
-                <strong>Nome:</strong> {order.user.name}
+                <strong>Nome:</strong>{" "}
+                {order.user.nickname ? order.user.nickname : order.user.name}
               </p>
               <p>Telefone: {order.user.phone}</p>
               <p>

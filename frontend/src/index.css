@@ -68,3 +68,30 @@ h3 {
 p {
   text-align: justify;
 }
+
+.hex {
+  position: relative;
+  margin: 1em auto;
+  width: 6em;
+  height: 10.2em;
+  border-radius: 1em/0.5em;
+  background: #c5212d;
+  transform: rotate(-90deg);
+  display: inline-block;
+  margin-right: 4.61538em;
+  transition: all 150ms ease-in-out;
+}
+.circle {
+  font-size: 5rem;
+  width: 5rem;
+
+  background-color: #c5212d;
+  padding: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.circle {
+  transform: scale(0.5);
+}

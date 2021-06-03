@@ -10,6 +10,8 @@ import { register } from "../actions/userActions";
 
 function RegisterScreen({ location, history }) {
   const [name, setName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [nickname, setNickname] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -46,9 +48,21 @@ function RegisterScreen({ location, history }) {
     if (password !== confirmpassword) {
       setMessage("As senhas não são iguais");
     } else {
-      dispatch(register(name, cpf, email, phone, birthday, password));
+      dispatch(
+        register(
+          name,
+          last_name,
+          nickname,
+          cpf,
+          email,
+          phone,
+          birthday,
+          password
+        )
+      );
     }
   };
+  console.log(name, email);
   return (
     <FormContainer>
       <h1>Entre</h1>
@@ -56,8 +70,8 @@ function RegisterScreen({ location, history }) {
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader></Loader>}
       <Form onSubmit={submitHandler}>
-        <Form.Group controId="name">
-          <Form.Label>Nome</Form.Label>
+        <Form.Group controlId="name">
+          <Form.Label>Nome*</Form.Label>
           <Form.Control
             required
             type="name"
@@ -67,8 +81,29 @@ function RegisterScreen({ location, history }) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controId="cpf">
-          <Form.Label>CPF</Form.Label>
+        <Form.Group controlId="name">
+          <Form.Label>Sobrenome*</Form.Label>
+          <Form.Control
+            required
+            type="name"
+            placeholder="Insira seu sobrenome"
+            value={last_name}
+            onChange={(e) => setLastName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="name">
+          <Form.Label>Nome Social</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="Como prefere ser chamado(a)?"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="cpf">
+          <Form.Label>CPF*</Form.Label>
           <Form.Control
             required
             type="text"
@@ -78,8 +113,8 @@ function RegisterScreen({ location, history }) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controId="email">
-          <Form.Label>Email</Form.Label>
+        <Form.Group controlId="email">
+          <Form.Label>Email*</Form.Label>
           <Form.Control
             required
             type="email"
@@ -89,8 +124,8 @@ function RegisterScreen({ location, history }) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controId="phone">
-          <Form.Label>Telefone</Form.Label>
+        <Form.Group controlId="phone">
+          <Form.Label>Telefone*</Form.Label>
           <Form.Control
             required
             type="text"
@@ -100,8 +135,8 @@ function RegisterScreen({ location, history }) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controId="birthday">
-          <Form.Label>Data de Nascimento</Form.Label>
+        <Form.Group controlId="birthday">
+          <Form.Label>Data de Nascimento*</Form.Label>
           <Form.Control
             required
             type="date"
@@ -110,8 +145,8 @@ function RegisterScreen({ location, history }) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controId="password">
-          <Form.Label>Senha</Form.Label>
+        <Form.Group controlId="password">
+          <Form.Label>Senha*</Form.Label>
           <Form.Control
             required
             type="password"
@@ -121,8 +156,8 @@ function RegisterScreen({ location, history }) {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controId="passwordConfirm">
-          <Form.Label>Confirme a Senha</Form.Label>
+        <Form.Group controlId="passwordConfirm">
+          <Form.Label>Confirme a Senha*</Form.Label>
           <Form.Control
             required
             type="password"

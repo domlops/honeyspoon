@@ -12,11 +12,13 @@ import {
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import CategoryBar from "../components/CategoryBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
   listProductDetails,
   createProductReview,
 } from "../actions/productActions";
+import { addToCart } from "../actions/cartActions";
 
 function ProductScreen({ match, history }) {
   const productId = match.params.id;
@@ -24,6 +26,7 @@ function ProductScreen({ match, history }) {
   const [vary, setVary] = useState(0);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [add, setAdd] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -51,7 +54,8 @@ function ProductScreen({ match, history }) {
   }, [dispatch, match, success, productId]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${productId}?var=${vary}`);
+    dispatch(addToCart(productId, vary));
+    setAdd(true);
   };
 
   const submitHandler = (e) => {
@@ -83,7 +87,8 @@ function ProductScreen({ match, history }) {
         <Message variant="danger">{error}</Message>
       ) : (
         <div>
-          <Row>
+          <CategoryBar />
+          <Row className="mt-5">
             <Col md={5}>
               <Image src={product.image} alt={product.name} fluid />
             </Col>
@@ -164,6 +169,11 @@ function ProductScreen({ match, history }) {
                           </Button>
                         </Col>
                       </Row>
+                      {add && (
+                        <Message className="my-3" variant="success">
+                          Produto Adicionado com Sucesso!
+                        </Message>
+                      )}
                     </ListGroup.Item>
                   </ListGroup>
                 </Col>

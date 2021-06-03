@@ -42,6 +42,8 @@ def registerUser(request):
     try:
         user = User.objects.create(
             name=data['name'],
+            last_name=data['last_name'],
+            nickname=data['nickname'],
             cpf=data['cpf'],
             username=data['email'],
             email=data['email'],
@@ -66,6 +68,8 @@ def updateUserProfile(request):
     data = request.data
 
     user.name = data['name']
+    user.last_name = data['last_name']
+    user.nickname = data['nickname']
     user.username = data['email']
     user.email = data['email']
     user.phone = data['phone']

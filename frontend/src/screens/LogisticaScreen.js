@@ -38,9 +38,8 @@ function LogisticaScreen() {
           </p>
           <h5>
             Devolvendo embalagens, produtos sem uso ou com vida útil findada, a
-            gente faz o descarte adequado pra você e você ainda ganha um vale
-            desconto de 5% para suas próximas compras (cumulativo com outras
-            promoções)
+            gente faz o descarte adequado e você ainda ganha um vale desconto de
+            5% para suas próximas compras (cumulativo com outras promoções)
           </h5>
           <p>
             Pra que o resíduo possa ser coletado basta estar higienizado, você
