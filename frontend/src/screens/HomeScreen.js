@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, FormControl } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -13,8 +13,6 @@ function HomeScreen({ history }) {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { error, loading, products, page, pages } = productList;
-
-  const [sort, setSort] = useState("");
 
   let keyword = history.location.search;
   useEffect(() => {

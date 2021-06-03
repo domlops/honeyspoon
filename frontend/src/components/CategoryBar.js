@@ -94,6 +94,9 @@ function CategoryBar() {
           <Nav.Link eventKey="Fetiche">
             <h6>Fetiche</h6>
           </Nav.Link>
+          <Nav.Link eventKey="Lingerie">
+            <h6>Lingerie</h6>
+          </Nav.Link>
           <Nav.Link eventKey="Massageadores">
             <h6>Massageadores</h6>
           </Nav.Link>

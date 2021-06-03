@@ -19,6 +19,7 @@ function PlaceOrderScreen({ history }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const [cupom, setCupom] = useState("");
+  const [observation, setObservation] = useState("");
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, error, loading, success } = orderCreate;
@@ -79,6 +80,7 @@ function PlaceOrderScreen({ history }) {
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         totalPrice: cart.totalPrice,
+        observation,
       })
     );
   };
@@ -236,6 +238,16 @@ function PlaceOrderScreen({ history }) {
               </ListGroup.Item>
             </ListGroup>
           </Card>
+          <Form.Group control="description">
+            <Form.Label>Observações</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={5}
+              value={observation}
+              placeholder="Tem alguma observação para o seu pedido?"
+              onChange={(e) => setObservation(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
           {couponError && <Message variant="danger">{couponError}</Message>}
           {couponSuccess && (
             <Message variant="success">Cupom Inserido com Sucesso</Message>

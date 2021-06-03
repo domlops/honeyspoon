@@ -127,6 +127,7 @@ class OrderItem(models.Model):
     price = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
     image = models.CharField(max_length=100, null=True, blank=True)
+    observation = models.TextField(null=True, blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):

@@ -68,6 +68,7 @@ def addOrderItems(request):
                 qty=i['qty'],
                 price=data_price,
                 image=i['variation']['image'],
+                observation=i['observation']
             )
             variation.countInStock -= item.qty
             product.countInStock -= item.qty

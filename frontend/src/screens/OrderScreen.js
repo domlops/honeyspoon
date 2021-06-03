@@ -246,6 +246,7 @@ function OrderScreen({ match, history }) {
                 </Button>
               </ListGroup.Item>
             )}
+            {loadingPay && <Loader />}
 
             {loadingDeliver && <Loader />}
             {userInfo &&

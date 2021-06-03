@@ -55,11 +55,12 @@ export const Categorias = [
   "Vibradores",
   "Dildos e Plugs",
   "Fetiche",
+  "Anéis Penianos",
   "Massageadores",
+  "Lingerie",
+  "Cuidados",
   "Chocolates",
   "Para Menstruação",
-  "Cuidados",
-  "Anéis Penianos",
   "Outros",
 ];
 
