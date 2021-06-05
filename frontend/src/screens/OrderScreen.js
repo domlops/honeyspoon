@@ -205,6 +205,12 @@ function OrderScreen({ match, history }) {
                 </ListGroup>
               )}
             </ListGroup.Item>
+            {order.observation && (
+              <ListGroup.Item>
+                <h5>Observações:</h5>
+                <p>{order.observation}</p>
+              </ListGroup.Item>
+            )}
           </ListGroup>
         </Col>
         <Col md={3}>

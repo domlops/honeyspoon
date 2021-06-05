@@ -41,7 +41,8 @@ def addOrderItems(request):
             user=user,
             paymentMethod=data['paymentMethod'],
             shippingPrice=data['shippingPrice'],
-            totalPrice=data['totalPrice']
+            totalPrice=data['totalPrice'],
+            observation=data['observation']
         )
         Address.objects.create(
             order=order,
@@ -68,7 +69,6 @@ def addOrderItems(request):
                 qty=i['qty'],
                 price=data_price,
                 image=i['variation']['image'],
-                observation=i['observation']
             )
             variation.countInStock -= item.qty
             product.countInStock -= item.qty
