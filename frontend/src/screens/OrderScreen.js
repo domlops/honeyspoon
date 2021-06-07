@@ -159,12 +159,12 @@ function OrderScreen({ match, history }) {
                 </Message>
               ) : (
                 <Message className="my-3" variant="warning">
-                  Pagamento pendente (Caso já esteja pago, envie o comprovante
-                  de pagamente através do{" "}
+                  Pagamento pendente, para concluir o pagamento entre em contato
+                  conosco através do{" "}
                   <Alert.Link href="https://wa.me/message/3B7EYFQSVWKQO1">
                     WhatsApp
-                  </Alert.Link>
-                  )
+                  </Alert.Link>{" "}
+                  e informe o número do pedido para receber o link de pagamento.
                 </Message>
               )}
             </ListGroup.Item>

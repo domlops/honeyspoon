@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Button, Card, Col, Image, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import CategoryBar from "../components/CategoryBar";
 import { Colmeia } from "../Lists";
 
 function ColmeiaScreen() {
@@ -10,6 +10,7 @@ function ColmeiaScreen() {
 
   return (
     <div>
+      <CategoryBar />
       <Row>
         <Col md={12}>
           <Button

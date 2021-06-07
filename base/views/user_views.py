@@ -112,7 +112,6 @@ def updateUser(request, pk):
     user = User.objects.get(id=pk)
 
     data = request.data
-    print(data)
 
     user.name = data['name']
     user.username = data['email']

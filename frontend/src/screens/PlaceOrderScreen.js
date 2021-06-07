@@ -54,11 +54,13 @@ function PlaceOrderScreen({ history }) {
         Number(cart.itemsPrice) * 0.2 +
         Number(cart.shippingPrice)
       ).toFixed(2)
-    : (
+    : userInfo.is_honey
+    ? (
         Number(cart.itemsPrice) -
         Number(cart.itemsPrice) * 0.1 +
         Number(cart.shippingPrice)
-      ).toFixed(2);
+      ).toFixed(2)
+    : (Number(cart.itemsPrice) + Number(cart.shippingPrice)).toFixed(2);
 
   if (!cart.paymentMethod) {
     history.push("/payment");
@@ -181,12 +183,15 @@ function PlaceOrderScreen({ history }) {
                   <Col>R$ {formatPrice(cart.itemsPrice)}</Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Desconto:</Col>
-                  <Col>{userInfo.is_honey_first ? "- 20%" : "-10%"}</Col>
-                </Row>
-              </ListGroup.Item>
+              {userInfo.is_honey_first ||
+                (userInfo.is_honey && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Desconto:</Col>
+                      <Col>{userInfo.is_honey_first ? "- 20%" : "-10%"}</Col>
+                    </Row>
+                  </ListGroup.Item>
+                ))}
               <ListGroup.Item>
                 <Row>
                   <Col>Frete:</Col>
