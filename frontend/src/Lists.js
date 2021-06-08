@@ -60,7 +60,7 @@ export const Categorias = [
   "Lingerie",
   "Cuidados",
   "Chocolates",
-  "Para Menstruação",
+  "Inciclo",
   "Outros",
 ];
 

@@ -26,7 +26,7 @@ function AromaScreen() {
         >
           <Image
             src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/aroma-1.svg"
-            alt="intro"
+            alt="1"
             fluid
           />
         </Nav.Link>
@@ -35,7 +35,7 @@ function AromaScreen() {
       <Row className="my-4">
         <Image
           src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/aroma-2.svg"
-          alt="intro"
+          alt="2"
           fluid
         />
       </Row>
@@ -43,7 +43,7 @@ function AromaScreen() {
       <Row className="my-4">
         <Image
           src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/aroma-3.svg"
-          alt="intro"
+          alt="3"
           fluid
         />
       </Row>
@@ -52,7 +52,7 @@ function AromaScreen() {
         <Nav.Link href="#" target="_blank">
           <Image
             src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/aroma-4.svg"
-            alt="intro"
+            alt="4"
             fluid
           />
         </Nav.Link>
