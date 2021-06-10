@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import { Form, Button, Row, Col, Table } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -15,7 +14,6 @@ import {
 function VariationEditScreen({ match, history }) {
   const variationId = match.params.pk;
   const productId = match.params.id;
-  const id = productId;
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [promo_price, setPromo_price] = useState(0);
@@ -41,7 +39,7 @@ function VariationEditScreen({ match, history }) {
       history.push(`/admin/product/${variation.product}/edit`);
     }
 
-    if (variation.id != Number(variationId)) {
+    if (variation.id !== Number(variationId)) {
       dispatch(listVariationDetails(productId, variationId));
     } else {
       setName(variation.name);

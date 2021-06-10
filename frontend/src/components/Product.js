@@ -27,10 +27,17 @@ function Product({ product }) {
             Indisponível
           </Card.Text>
         ) : product.promo_price > 0 ? (
-          <Card.Text as="h4" className="text-center">
-            <del>R$ {product.price.replace(".", ",")}</del> R${" "}
-            {product.promo_price.replace(".", ",")}
-          </Card.Text>
+          <Card.Body>
+            <Card.Text as="h4" className="text-center">
+              <del>R$ {product.price.replace(".", ",")}</del>
+              
+            </Card.Text>
+
+            <Card.Text as="h4" className="text-center">
+              R$ {product.promo_price.replace(".", ",")}
+              
+            </Card.Text>
+          </Card.Body>
         ) : (
           <Card.Text as="h3" className="text-center">
             R$ {product.price.replace(".", ",")}

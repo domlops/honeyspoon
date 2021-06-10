@@ -96,6 +96,7 @@ function EditProductScreen({ match, history }) {
     successVariation,
     successDelete,
     createdVariation,
+    reload,
   ]);
 
   const submitHandler = (e) => {

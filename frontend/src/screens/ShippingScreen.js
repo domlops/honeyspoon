@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { mask, unMask } from "remask";

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +11,7 @@ import {
   Card,
 } from "react-bootstrap";
 import Message from "../components/Message";
-import { addToCart, removeFromCart, addSameItem } from "../actions/cartActions";
+import { removeFromCart, addSameItem } from "../actions/cartActions";
 
 function CartScreen({ match, location, history }) {
   const dispatch = useDispatch();

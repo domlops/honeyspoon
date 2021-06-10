@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
@@ -7,7 +7,6 @@ import {
   ListGroup,
   Image,
   Card,
-  Nav,
   Alert,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -22,8 +21,7 @@ import {
 function OrderScreen({ match, history }) {
   const orderId = match.params.id;
   const dispatch = useDispatch();
-  const [sdkReady, setSdkReady] = useState(false);
-
+  
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, error, loading } = orderDetails;
 
@@ -42,17 +40,6 @@ function OrderScreen({ match, history }) {
       .toFixed(2);
   }
 
-  const addMercadoPagoScript = () => {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js";
-    script.async = true;
-    script.onload = () => {
-      setSdkReady(true);
-    };
-    document.body.appendChild(script);
-  };
-
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
@@ -66,12 +53,6 @@ function OrderScreen({ match, history }) {
       dispatch({ type: "ORDER_PAY_RESET" });
       dispatch({ type: "ORDER_DELIVER_RESET" });
       dispatch(getOrderDetails(orderId));
-    } else if (!order.isPaid) {
-      if (!window.mercadopago) {
-        addMercadoPagoScript();
-      } else {
-        setSdkReady(true);
-      }
     }
   }, [dispatch, history, userInfo, order, orderId, successPay, successDeliver]);
 
@@ -81,10 +62,6 @@ function OrderScreen({ match, history }) {
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
   };
 
   return loading ? (
