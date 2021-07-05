@@ -59,16 +59,6 @@ function HomeCarousel() {
       </Carousel.Item>
 
       <Carousel.Item>
-        <Link to="/?search=valentines&page=1">
-          <Image
-            className="d-block w-100"
-            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/4.svg"
-            fluid="true"
-          />
-        </Link>
-      </Carousel.Item>
-
-      <Carousel.Item>
         <Image
           className="d-block w-100"
           src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/6.svg"

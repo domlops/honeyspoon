@@ -30,12 +30,10 @@ function Product({ product }) {
           <Card.Body>
             <Card.Text as="h4" className="text-center">
               <del>R$ {product.price.replace(".", ",")}</del>
-              
             </Card.Text>
 
             <Card.Text as="h4" className="text-center">
               R$ {product.promo_price.replace(".", ",")}
-              
             </Card.Text>
           </Card.Body>
         ) : (
