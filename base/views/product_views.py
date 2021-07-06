@@ -27,7 +27,7 @@ def getProducts(request):
             pk__in=[22, 59, 93, 119, 21, 18, 96, 44, 80, 14, 68, 115])
     else:
         products = Product.objects.filter(
-            name__icontains=query).order_by('-_id')
+            name__icontains=query).order_by('_id')
 
     page = request.query_params.get('page')
     paginator = Paginator(products, 12)
