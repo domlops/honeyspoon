@@ -30,6 +30,15 @@ function PlaceOrderScreen({ history }) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  if (couponSuccess) {
+    cart.cartItems.map(
+      (item) =>
+        item.category === "Dildos e Plugs" &&
+        (item.variation.price =
+          item.variation.price - item.variation.price * 0.2)
+    );
+  }
+
   cart.itemsPrice = cart.cartItems
     .reduce(
       (acc, item) =>
@@ -91,15 +100,14 @@ function PlaceOrderScreen({ history }) {
     if (typeof price == "string") {
       return price.replace(".", ",");
     }
+    if (typeof price == "number") {
+      return price.toFixed(2).replace(".", ",");
+    }
   };
 
   const sendCoupon = (c) => {
     dispatch(checkCoupon({ coupon: c }));
   };
-
-  if (couponSuccess) {
-    cart.totalPrice = (cart.totalPrice - cart.totalPrice * 0.2).toFixed(2);
-  }
 
   return (
     <div>
@@ -155,8 +163,8 @@ function PlaceOrderScreen({ history }) {
                         <Col md={4}>
                           {item.qty} x R${" "}
                           {item.variation.promo_price > 0
-                            ? item.variation.promo_price
-                            : item.variation.price}{" "}
+                            ? formatPrice(item.variation.promo_price)
+                            : formatPrice(item.variation.price)}{" "}
                           = R${" "}
                           {(
                             item.qty *

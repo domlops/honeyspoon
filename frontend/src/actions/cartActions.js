@@ -10,6 +10,7 @@ export const addToCart = (id, vary) => async (dispatch, getState) => {
       name: data.name,
       index: vary,
       variation: data.variations[vary],
+      category: data.category,
       qty: 1,
     },
   });

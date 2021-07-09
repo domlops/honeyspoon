@@ -172,5 +172,5 @@ class Variation(models.Model):
 
 
 class Coupon(models.Model):
-    code = models.CharField(max_length=15)
+    code = models.CharField(max_length=20)
     amount = models.PositiveIntegerField()
