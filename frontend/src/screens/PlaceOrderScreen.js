@@ -97,6 +97,10 @@ function PlaceOrderScreen({ history }) {
     dispatch(checkCoupon({ coupon: c }));
   };
 
+  if (couponSuccess) {
+    cart.totalPrice = (cart.totalPrice - cart.totalPrice * 0.2).toFixed(2);
+  }
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4 />

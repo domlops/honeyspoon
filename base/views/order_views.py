@@ -21,6 +21,7 @@ def checkCoupon(request):
     else:
         coupon = Coupon.objects.get(code=data)
         coupon.amount -= 1
+        coupon.save()
 
         serializer = CouponSerializer(coupon, many=False)
         return Response(serializer.data)
