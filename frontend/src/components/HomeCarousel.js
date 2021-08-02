@@ -52,7 +52,7 @@ function HomeCarousel() {
         <Link to="/colmeia">
           <Image
             className="d-block w-100"
-            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/5.svg"
+            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/4.svg"
             fluid="true"
           />
         </Link>
@@ -61,7 +61,7 @@ function HomeCarousel() {
       <Carousel.Item>
         <Image
           className="d-block w-100"
-          src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/6.svg"
+          src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/5.svg"
           fluid="true"
         />
       </Carousel.Item>
@@ -69,7 +69,7 @@ function HomeCarousel() {
       <Carousel.Item>
         <Image
           className="d-block w-100"
-          src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/7.svg"
+          src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/6.svg"
           fluid="true"
         />
       </Carousel.Item>
