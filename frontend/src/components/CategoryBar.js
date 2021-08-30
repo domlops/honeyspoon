@@ -109,6 +109,9 @@ function CategoryBar() {
           <Nav.Link eventKey="Outros">
             <h6>Outros</h6>
           </Nav.Link>
+          <Nav.Link href="#/bazar">
+            <h6>Bazar</h6>
+          </Nav.Link>
         </Nav>
       )}
     </div>

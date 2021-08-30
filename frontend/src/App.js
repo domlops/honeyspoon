@@ -25,6 +25,7 @@ import ColmeiaScreen from "./screens/ColmeiaScreen";
 import MasterLoveScreen from "./screens/MasterLoveScreen";
 import InCicloScreen from "./screens/InCicloScreen";
 import AromaScreen from "./screens/AromaScreen";
+import BazarScreen from "./screens/BazarScreen";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
           <Route path="/mlove" component={MasterLoveScreen} />
           <Route path="/inciclo" component={InCicloScreen} />
           <Route path="/aroma-honeyspoon" component={AromaScreen} />
+          <Route path="/bazar" component={BazarScreen} />
         </Container>
       </main>
       <Footer id="footer" />

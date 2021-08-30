@@ -62,6 +62,7 @@ export const Categorias = [
   "Chocolates",
   "Inciclo",
   "Outros",
+  "Bazar",
 ];
 
 export const Cidades = [
