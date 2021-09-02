@@ -123,10 +123,15 @@ function ProductScreen({ match, history }) {
                           Indisponível
                         </Card.Text>
                       ) : variation.promo_price > 0 ? (
-                        <Card.Text id="lb" className="text-center" as="h5">
-                          de <del>R$ {formatPrice(variation.price)}</del>
-                          <h5>Por R$ {formatPrice(variation.promo_price)}</h5>
-                        </Card.Text>
+                        <Card.Body>
+                          <Card.Text as="h5" className="text-center">
+                            <del>R$ {formatPrice(variation.price)}</del>
+                          </Card.Text>
+
+                          <Card.Text as="h5" className="text-center">
+                            R$ {formatPrice(variation.promo_price)}
+                          </Card.Text>
+                        </Card.Body>
                       ) : (
                         <Card.Text id="lb" as="h5" className="text-center">
                           R$ {formatPrice(variation.price)}

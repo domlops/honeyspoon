@@ -109,7 +109,7 @@ function CategoryBar() {
           <Nav.Link eventKey="Outros">
             <h6>Outros</h6>
           </Nav.Link>
-          <Nav.Link href="#/bazar">
+          <Nav.Link eventKey="Bazar">
             <h6>Bazar</h6>
           </Nav.Link>
         </Nav>

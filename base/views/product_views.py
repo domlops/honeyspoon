@@ -22,9 +22,6 @@ def getProducts(request):
 
     if query in categories:
         products = Product.objects.filter(category=query)
-    elif query == "valentines":
-        products = Product.objects.filter(
-            pk__in=[22, 59, 93, 119, 21, 18, 96, 44, 80, 14, 68, 115])
     else:
         products = Product.objects.filter(
             name__icontains=query).order_by('_id')

@@ -53,7 +53,7 @@ function PlaceOrderScreen({ history }) {
 
   if (cart.shippingAddress.cidade === "Maceió") {
     cart.shippingPrice =
-      cart.itemsPrice > 40 ? (0).toFixed(2) : (10).toFixed(2);
+      cart.itemsPrice > 150 ? (0).toFixed(2) : (10).toFixed(2);
   } else {
     cart.shippingPrice = (15).toFixed(2);
   }
