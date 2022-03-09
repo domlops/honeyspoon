@@ -81,9 +81,7 @@ function ColmeiaScreen() {
       <Row>
         <Col md={12}>
           <Card as="h3" className="text-danger bg-primary my-3">
-            <Card.Body className="text-center">
-              Pólen do Mês de Agosto
-            </Card.Body>
+            <Card.Body className="text-center">Pólen do Mês</Card.Body>
           </Card>
         </Col>
       </Row>

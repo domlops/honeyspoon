@@ -30,27 +30,6 @@ function PlaceOrderScreen({ history }) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  if (couponSuccess) {
-    cart.cartItems.map(
-      (item) =>
-        item.category === "Dildos e Plugs" &&
-        (item.variation.price =
-          item.variation.price - item.variation.price * 0.2)
-    );
-  }
-
-  cart.itemsPrice = cart.cartItems
-    .reduce(
-      (acc, item) =>
-        acc +
-        (item.variation.promo_price > 0
-          ? item.variation.promo_price
-          : item.variation.price) *
-          item.qty,
-      0
-    )
-    .toFixed(2);
-
   if (cart.shippingAddress.cidade === "Maceió") {
     cart.shippingPrice =
       cart.itemsPrice > 150 ? (0).toFixed(2) : (10).toFixed(2);
@@ -109,6 +88,21 @@ function PlaceOrderScreen({ history }) {
     dispatch(checkCoupon({ coupon: c }));
   };
 
+  if (couponSuccess) {
+    cart.totalPrice = cart.totalPrice - cart.totalPrice * 0.15;
+  }
+
+  cart.itemsPrice = cart.cartItems
+    .reduce(
+      (acc, item) =>
+        acc +
+        (item.variation.promo_price > 0
+          ? item.variation.promo_price
+          : item.variation.price) *
+          item.qty,
+      0
+    )
+    .toFixed(2);
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4 />
