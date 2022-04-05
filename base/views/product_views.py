@@ -1,4 +1,5 @@
 from os import remove
+from typing import OrderedDict
 from base import functions
 from django.utils import timezone
 from rest_framework import status
@@ -21,10 +22,10 @@ def getProducts(request):
     categories = Product.objects.values_list('category', flat=True)
 
     if query in categories:
-        products = Product.objects.filter(category=query)
+        products = Product.objects.filter(category=query).order_by('-countInStock')
     else:
         products = Product.objects.filter(
-            name__icontains=query).order_by('_id')
+            name__icontains=query).order_by('-countInStock')        
 
     page = request.query_params.get('page')
     paginator = Paginator(products, 12)
