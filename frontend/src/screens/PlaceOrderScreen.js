@@ -36,6 +36,7 @@ function PlaceOrderScreen({ history }) {
   } else {
     cart.shippingPrice = (15).toFixed(2);
   }
+
   cart.totalPrice = userInfo.is_honey_first
     ? (
         Number(cart.itemsPrice) -
@@ -60,20 +61,6 @@ function PlaceOrderScreen({ history }) {
       dispatch({ type: "ORDER_CREATE_RESET" });
     }
   }, [dispatch, order, success, history]);
-
-  const placeOrder = () => {
-    dispatch(
-      createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingPrice,
-        totalPrice: cart.totalPrice,
-        observation,
-      })
-    );
-  };
 
   const formatPrice = (price) => {
     if (typeof price == "string") {
@@ -103,6 +90,21 @@ function PlaceOrderScreen({ history }) {
       0
     )
     .toFixed(2);
+
+  const placeOrder = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        totalPrice: cart.totalPrice,
+        observation,
+      })
+    );
+  };
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4 />
