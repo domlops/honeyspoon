@@ -30,11 +30,23 @@ function PlaceOrderScreen({ history }) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  cart.itemsPrice = cart.cartItems
+    .reduce(
+      (acc, item) =>
+        acc +
+        (item.variation.promo_price > 0
+          ? item.variation.promo_price
+          : item.variation.price) *
+          item.qty,
+      0
+    )
+    .toFixed(2);
+
   if (cart.shippingAddress.cidade === "Maceió") {
     cart.shippingPrice =
-      cart.itemsPrice > 150 ? (0).toFixed(2) : (10).toFixed(2);
+      cart.itemsPrice > 150 ? (0).toFixed(2) : (15).toFixed(2);
   } else {
-    cart.shippingPrice = (15).toFixed(2);
+    cart.shippingPrice = (20).toFixed(2);
   }
 
   cart.totalPrice = userInfo.is_honey_first
@@ -76,20 +88,8 @@ function PlaceOrderScreen({ history }) {
   };
 
   if (couponSuccess) {
-    cart.totalPrice = cart.totalPrice - cart.totalPrice * 0.15;
+    cart.totalPrice = cart.totalPrice - cart.totalPrice * 0.05;
   }
-
-  cart.itemsPrice = cart.cartItems
-    .reduce(
-      (acc, item) =>
-        acc +
-        (item.variation.promo_price > 0
-          ? item.variation.promo_price
-          : item.variation.price) *
-          item.qty,
-      0
-    )
-    .toFixed(2);
 
   const placeOrder = () => {
     dispatch(

@@ -123,18 +123,20 @@ export const orderDeliverReducer = (state = {}, action) => {
 export const orderListReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case "ORDER_LIST_REQUEST":
-      return {
-        loading: true,
-      };
+      return { loading: true, orders: [] };
+
     case "ORDER_LIST_SUCCESS":
       return {
         loading: false,
-        orders: action.payload,
+        orders: action.payload.orders,
+        page: action.payload.page,
+        pages: action.payload.pages,
       };
+
     case "ORDER_LIST_FAIL":
       return {
         loading: false,
-        order: action.payload,
+        error: action.payload,
       };
 
     case "ORDER_LIST_RESET":
@@ -148,18 +150,20 @@ export const orderListReducer = (state = { orders: [] }, action) => {
 export const orderAdminListReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case "ORDER_ADMIN_LIST_REQUEST":
-      return {
-        loading: true,
-      };
+      return { loading: true, orders: [] };
+
     case "ORDER_ADMIN_LIST_SUCCESS":
       return {
         loading: false,
-        orders: action.payload,
+        orders: action.payload.orders,
+        page: action.payload.page,
+        pages: action.payload.pages,
       };
+
     case "ORDER_ADMIN_LIST_FAIL":
       return {
         loading: false,
-        order: action.payload,
+        error: action.payload,
       };
 
     default:

@@ -2,7 +2,13 @@ import React from "react";
 import { Pagination } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-function Paginate({ pages, page, keyword = "", is_staff = false }) {
+function Paginate({
+  pages,
+  page,
+  keyword = "",
+  products = false,
+  orders = false,
+}) {
   if (keyword) {
     keyword = keyword.split("?search=")[1].split("&")[0];
   }
@@ -14,9 +20,11 @@ function Paginate({ pages, page, keyword = "", is_staff = false }) {
           <LinkContainer
             key={x + 1}
             to={
-              !is_staff
-                ? `/?search=${keyword}&page=${x + 1}`
-                : `/admin/productlist/?search=${keyword}&page=${x + 1}`
+              products
+                ? `/admin/productlist/?search=${keyword}&page=${x + 1}`
+                : orders
+                ? `/admin/orderlist/?search=${keyword}&page=${x + 1}`
+                : `/?search=${keyword}&page=${x + 1}`
             }
           >
             <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item>

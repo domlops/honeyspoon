@@ -74,8 +74,6 @@ function ProductScreen({ match, history }) {
     }
   };
 
-  console.log(vary);
-
   return (
     <div>
       <Link to="/" className="text-danger btn btn-primary my-4">
@@ -153,7 +151,7 @@ function ProductScreen({ match, history }) {
                             onChange={(e) => setVary(e.target.value)}
                           >
                             {product.variations.map((variation, index) => (
-                              <option key={variation.name} value={index}>
+                              <option key={variation.remove_pin} value={index}>
                                 {variation.name}
                               </option>
                             ))}

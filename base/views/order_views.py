@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from base.models import Product, Order, OrderItem, Address, Variation, Coupon
 from base.serializers import OrderSerializer, CouponSerializer
 from datetime import datetime
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @api_view(['POST'])
@@ -13,18 +14,18 @@ from datetime import datetime
 def checkCoupon(request):
     coupons = Coupon.objects.values_list('code', flat=True)
     data = request.data
-    data = data['coupon']
+    data = data['coupon'].lower()
 
-    if data not in coupons:
-        return Response({'detail': 'Cupom Inválido ou Expirado'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+            coupon = Coupon.objects.get(code=data)
+            coupon.amount -= 1
+            coupon.save()
 
-    else:
-        coupon = Coupon.objects.get(code=data)
-        coupon.amount -= 1
-        coupon.save()
-
-        serializer = CouponSerializer(coupon, many=False)
-        return Response(serializer.data)
+            serializer = CouponSerializer(coupon, many=False)
+            return Response(serializer.data)
+    except:
+        return Response({'detail': 'Cupom Inválido ou Expirado'},
+        status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -99,15 +100,36 @@ def getMyOrders(request):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getOrders(request):
-    orders = Order.objects.all()
+    orders = Order.objects.all().order_by("-_id")
     for order in orders:
         order.createdAt = order.createdAt.strftime('%d-%m-%Y')
         if order.paidAt:
             order.paidAt = order.paidAt.strftime('%d-%m-%Y')
         if order.deliveredAt:
             order.deliveredAt = order.deliveredAt.strftime('%d-%m-%Y')
+
+    page = request.query_params.get('page')
+    paginator = Paginator(orders, 12)
+
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+
+    if page == None:
+        page = 1
+
+    page = int(page)
+    
+
     serializer = OrderSerializer(orders, many=True)
-    return Response(serializer.data)
+    return Response({
+        'orders': serializer.data,
+        'page': page,
+        'pages': paginator.num_pages
+    })
 
 
 @api_view(['GET'])

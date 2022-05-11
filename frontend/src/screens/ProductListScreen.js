@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button, Row, Col, FormControl } from "react-bootstrap";
+import { Table, Button, Row, Col } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
@@ -13,9 +13,6 @@ import {
 
 function ProductListScreen({ history }) {
   const dispatch = useDispatch();
-
-  const [choice, setChoice] = useState("category");
-  const [order, setOrder] = useState("asc");
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
@@ -37,7 +34,6 @@ function ProductListScreen({ history }) {
   let keyword = history.location.search;
 
   useEffect(() => {
-    console.log(history.push);
     dispatch({ type: "PRODUCT_CREATE_RESET" });
 
     if (!userInfo.is_staff) {
@@ -65,34 +61,8 @@ function ProductListScreen({ history }) {
     }
   };
 
-  const createProductHandler = (product) => {
+  const createProductHandler = () => {
     dispatch(createProduct());
-  };
-
-  function compareValues(key, order = "asc") {
-    return function innerSort(a, b) {
-      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-        return 0;
-      }
-
-      const varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
-      const varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
-
-      let comparison = 0;
-      if (varA > varB) {
-        comparison = 1;
-      } else if (varA < varB) {
-        comparison = -1;
-      }
-      return order === "desc" ? comparison * -1 : comparison;
-    };
-  }
-
-  products.sort(compareValues(choice, order));
-
-  var sortBy = (value) => {
-    setChoice(value[0]);
-    setOrder(value[1]);
   };
 
   return (
@@ -105,19 +75,6 @@ function ProductListScreen({ history }) {
           <Button className="my-3 text-danger" onClick={createProductHandler}>
             <i className="fas fa-plus"></i> Adicionar Produto
           </Button>
-        </Col>
-        <Col md={3} className="text-right">
-          <FormControl
-            as="select"
-            onChange={(e) => sortBy(e.target.value.split("-"))}
-          >
-            <option value="category-asc">Categoria (maior-menor)</option>
-            <option value="category-desc">Categoria (menor-maior)</option>
-            <option value="price-asc">Preço (maior-menor)</option>
-            <option value="price-desc">Preço (menor-maior)</option>
-            <option value="expire-asc">Validade (menor-maior)</option>
-            <option value="expire-desc">Validade (menor-maior)</option>
-          </FormControl>
         </Col>
       </Row>
 
@@ -149,7 +106,7 @@ function ProductListScreen({ history }) {
 
             <tbody>
               {products.map((product) => (
-                <tr key={product.category}>
+                <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.category}</td>
                   <td>{product.name}</td>
@@ -178,7 +135,7 @@ function ProductListScreen({ history }) {
               ))}
             </tbody>
           </Table>
-          <Paginate pages={pages} page={page} is_staff={true} />
+          <Paginate pages={pages} page={page} products={true} />
         </div>
       )}
     </div>

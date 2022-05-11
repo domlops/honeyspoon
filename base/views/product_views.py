@@ -1,5 +1,3 @@
-from os import remove
-from typing import OrderedDict
 from base import functions
 from django.utils import timezone
 from rest_framework import status
@@ -7,7 +5,6 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from base import serializers
 from base.models import  Product, Review, Variation
 from base.serializers import ProductSerializer, VariationSerializer
 
@@ -15,11 +12,11 @@ from base.serializers import ProductSerializer, VariationSerializer
 @api_view(['GET'])
 def getProducts(request):
     query = request.query_params.get('search')
+    
+    categories = Product.objects.values_list('category', flat=True)
 
     if query == None:
         query = ''
-
-    categories = Product.objects.values_list('category', flat=True)
 
     if query in categories:
         products = Product.objects.filter(category=query).order_by('-countInStock')

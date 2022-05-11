@@ -15,7 +15,6 @@ function HomeScreen({ history }) {
   const { error, loading, products, page, pages } = productList;
 
   let keyword = history.location.search;
-  console.log(keyword);
   useEffect(() => {
     dispatch(listProducts(keyword));
   }, [dispatch, keyword]);

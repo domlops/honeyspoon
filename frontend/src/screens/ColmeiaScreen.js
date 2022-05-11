@@ -11,6 +11,7 @@ function ColmeiaScreen() {
   return (
     <div>
       <CategoryBar />
+
       <Row>
         <Col md={12}>
           <Button
