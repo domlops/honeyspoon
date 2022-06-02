@@ -88,7 +88,7 @@ function PlaceOrderScreen({ history }) {
   };
 
   if (couponSuccess) {
-    cart.totalPrice = cart.totalPrice - cart.totalPrice * 0.05;
+    cart.totalPrice = cart.totalPrice - cart.totalPrice * 0.1;
   }
 
   const placeOrder = () => {
