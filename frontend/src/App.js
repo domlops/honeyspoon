@@ -22,9 +22,13 @@ import OrderListScreen from "./screens/OrderListScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import ColmeiaScreen from "./screens/ColmeiaScreen";
-import MasterLoveScreen from "./screens/MasterLoveScreen";
 import InCicloScreen from "./screens/InCicloScreen";
 import AromaScreen from "./screens/AromaScreen";
+import EntregaScreen from "./screens/EntregaScreen";
+import FaqScreen from "./screens/FaqScreen";
+import PagScreen from "./screens/PagScreen";
+import TreeScreen from "./screens/TreeScreen";
+import PapoScreen from "./screens/PapoScreen";
 
 function App() {
   return (
@@ -57,8 +61,14 @@ function App() {
           <Route path="/inst/troca" component={TrocaScreen} />
           <Route path="/inst/logistica" component={LogisticaScreen} />
 
+          <Route path="/info/entrega" component={EntregaScreen} />
+          <Route path="/info/faq" component={FaqScreen} />
+          <Route path="/info/pag" component={PagScreen} />
+
+          <Route path="/links" component={TreeScreen} />
+
           <Route path="/colmeia" component={ColmeiaScreen} />
-          <Route path="/mlove" component={MasterLoveScreen} />
+          <Route path="/papo" component={PapoScreen} />
           <Route path="/inciclo" component={InCicloScreen} />
           <Route path="/aroma-honeyspoon" component={AromaScreen} />
         </Container>

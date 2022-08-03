@@ -6,23 +6,36 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from base.models import  Product, Review, Variation
-from base.serializers import ProductSerializer, VariationSerializer
+from base.serializers import ProductSerializer, ProductAdminSerializer, VariationSerializer
 
 
 @api_view(['GET'])
 def getProducts(request):
-    query = request.query_params.get('search')
-    
-    categories = Product.objects.values_list('category', flat=True)
+    essentials = [159, 10, 197, 189]
+    home_list = [206, 176, 213, 172, 180, 193, 173, 209, 182, 135, 184, 214]
+    temp=[76,77,210]
+    categories = Product.objects.values_list('category', flat=True).distinct()
+    categories = [x.lower() for x in categories]
+    subs = Product.objects.values_list('sub_categories', flat=True).distinct()
+    subs = [x.lower() for l in subs for x in l]
 
+    query = request.query_params.get('search')
     if query == None:
         query = ''
 
-    if query in categories:
-        products = Product.objects.filter(category=query).order_by('-countInStock')
+    if query == "outros":
+        products = Product.objects.filter(_id__in=temp).order_by("-countInStock")
+    elif query in categories:
+        products = Product.objects.filter(category=query.upper()).order_by("-countInStock")
+    elif query in subs:
+        products = Product.objects.filter(sub_categories__icontains=query.upper()).order_by("-countInStock")
+    elif query == "essentials":
+        products = Product.objects.filter(_id__in=essentials).order_by("-countInStock")
+    elif query == "home":
+        products = Product.objects.filter(_id__in=home_list).order_by("-_id")
     else:
         products = Product.objects.filter(
-            name__icontains=query).order_by('-countInStock')        
+            tags__icontains=query).order_by("_id")
 
     page = request.query_params.get('page')
     paginator = Paginator(products, 12)
@@ -48,16 +61,24 @@ def getProducts(request):
 
 
 @api_view(['GET'])
-def getTopProducts(request):
-    products = Product.objects.filter(rating__gte=4).order_by('-rating')[0:5]
-    serializer = ProductSerializer(products, many=True)
-
+def getProductAdmin(request, pk):
+    product = Product.objects.get(_id=pk)
+    serializer = ProductAdminSerializer(product, many=False)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
+
+    if len(product.related) > 0:
+        related_list = list(product.related.split(","))
+        product.related = Product.objects.filter(_id__in=related_list)
+
+    if len(product.similar) >0:
+        similar_list = list(product.similar.split(","))
+        product.similar = Product.objects.filter(_id__in=similar_list)
+
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
@@ -79,9 +100,10 @@ def createProduct(request):
         name='',
         price=0,
         promo_price=0,
-        category='Bolinhas',
+        category='OUTROS',
         countInStock=0,
         description='',
+        tags=[],
     )
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
@@ -111,12 +133,22 @@ def updateProduct(request, pk):
 
     product.name = data['name']
     product.category = data['category']
+    product.sub_categories = data['sub_categories']
     product.price = data['price']
     product.type = data['type']
     product.expire = data['expire']
     product.promo_price = data['promo_price']
     product.countInStock = data['countInStock']
     product.description = data['description']
+    product.ficha = data['ficha']
+    product.carac = data['carac']
+    product.como = data['como']
+    product.cuidados = data['cuidados']
+    product.higiene = data['higiene']
+    product.recomendacoes = data['recomendacoes']
+    product.tags = data['tags']
+    product.related = data['related']
+    product.similar = data['similar']
 
     product.save()
 

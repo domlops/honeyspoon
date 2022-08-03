@@ -12,9 +12,9 @@ function TrocaScreen() {
         </Col>
       </Row>
       <Row>
-        <Col md={12}>
+        <Col className="mx-3">
           <p>
-            Oie, aqui vamos conversar um pouco sobre nossa política de troca.
+            Oi Bee, aqui vamos conversar um pouco sobre nossa política de troca.
             Nós da Uma Colher de Mel conferimos todos os produtos pra garantir
             que eles cheguem perfeitos pra você! Mas alguns produtos vem
             completamente lacrados e aí a gente não tem como conferir, né?! Em
@@ -22,13 +22,14 @@ function TrocaScreen() {
             funcionamento ou você simplesmente não gostou do que comprou, entra
             em contato com a gente pra que possamos te ajudar.
           </p>
-          <h6>Caso haja defeitos:</h6>
+          <p>De acordo com o Código de Defesa do Consumidor:</p>
+          <h5>Caso haja defeitos:</h5>
           <p>
-            A troca porderá acontecer em até no máximo 30 dias após o dia da
+            A troca poderá acontecer em até no máximo 30 dias após o dia da
             compra. Será avaliado o estado geral do produto para que possamos
-            garantir o estorno ou a troca.
+            garantir o estorno ou a troca;
           </p>
-          <h6>Caso haja desistência ou arrependimento:</h6>
+          <h5>Caso haja desistência ou arrependimento:</h5>
           <p>
             A troca poderá acontecer em até no máximo 7 dias. Será avaliado o
             estado geral do produto para que possamos garantir o estorno ou a

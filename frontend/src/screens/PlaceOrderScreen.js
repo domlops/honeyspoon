@@ -252,7 +252,7 @@ function PlaceOrderScreen({ history }) {
             </ListGroup>
           </Card>
           <Form.Group control="description">
-            <Form.Label>Observações</Form.Label>
+            <Form.Label className="py-2">Observações</Form.Label>
             <Form.Control
               as="textarea"
               rows={5}

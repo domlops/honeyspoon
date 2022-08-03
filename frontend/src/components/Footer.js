@@ -12,47 +12,36 @@ function Footer() {
           >
             <Card.Title id="footer-p">Institucional</Card.Title>
             <Card.Text></Card.Text>
-            <Card.Link className="link" href="#/inst/about">
+            <Card.Link className="text-danger" href="#/inst/about">
               Sobre Nós
             </Card.Link>
             <Card.Text></Card.Text>
-            <Card.Link className="link" href="#/inst/troca">
+            <Card.Link className="text-danger" href="#/inst/troca">
               Politica de Troca
             </Card.Link>
             <Card.Text></Card.Text>
-            <Card.Link className="link" href="#/inst/logistica">
+            <Card.Link className="text-danger" href="#/inst/logistica">
               Logistica Reversa
             </Card.Link>
           </Card>
 
           <Card
-            className="text-white bg-primary p-3"
+            bg="primary"
+            className="text-white p-3"
             style={{ width: "20rem" }}
           >
-            <Card.Title id="footer-p">Videos</Card.Title>
+            <Card.Title id="footer-p">Informações Úteis</Card.Title>
             <Card.Text></Card.Text>
-            <Card.Link
-              className="link"
-              href="https://www.instagram.com/tv/COLtgAzl3pS/?utm_medium=copy_link"
-              target="_blank"
-            >
-              Falando sobre coletor menstrual
+            <Card.Link className="text-danger" href="#/info/entrega">
+              Fretes e Entrega
             </Card.Link>
             <Card.Text></Card.Text>
-            <Card.Link
-              className="link"
-              href="https://www.instagram.com/tv/CDPbmhbp4VT/?utm_medium=copy_link"
-              target="_blank"
-            >
-              Não use comida!
+            <Card.Link className="text-danger" href="#/info/faq">
+              Dúvidas Frequentes
             </Card.Link>
             <Card.Text></Card.Text>
-            <Card.Link
-              className="link"
-              href="https://www.instagram.com/tv/CCt_2-5pXTO/?utm_medium=copy_link"
-              target="_blank"
-            >
-              Como limpar seu sextoy
+            <Card.Link className="text-danger" href="#/info/pag">
+              Formas de Pagamento
             </Card.Link>
           </Card>
 
@@ -63,7 +52,7 @@ function Footer() {
             <Card.Title id="footer-p">Fale Conosco</Card.Title>
             <Card.Text></Card.Text>
             <Card.Link
-              className="link"
+              className="text-danger"
               href="https://www.instagram.com/_umacolherdemel/"
               target="_blank"
             >
@@ -71,7 +60,7 @@ function Footer() {
             </Card.Link>
             <Card.Text></Card.Text>
             <Card.Link
-              className="link"
+              className="text-danger"
               href="https://wa.me/message/3B7EYFQSVWKQO1"
               target="_blank"
             >
@@ -79,7 +68,7 @@ function Footer() {
             </Card.Link>
             <Card.Text></Card.Text>
             <Card.Link
-              className="link"
+              className="text-danger"
               href="https://t.me/grupoumacolherdemel"
               target="_blank"
             >

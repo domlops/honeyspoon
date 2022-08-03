@@ -44,10 +44,16 @@ class VariationSerializer(serializers.ModelSerializer):
         model = Variation
         fields = '__all__'
 
+class RelationalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['_id', 'name', 'image', 'countInStock', 'price', 'promo_price']
 
 class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
     variations = serializers.SerializerMethodField(read_only=False)
+    related = RelationalSerializer(many=True, read_only=True)
+    similar = RelationalSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
@@ -63,6 +69,17 @@ class ProductSerializer(serializers.ModelSerializer):
         serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
 
+class ProductAdminSerializer(serializers.ModelSerializer):
+    variations = serializers.SerializerMethodField(read_only=False)
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+    def get_variations(self, obj):
+        variations = obj.variation_set.all()
+        serializer = VariationSerializer(variations, many=True)
+        return serializer.data
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:

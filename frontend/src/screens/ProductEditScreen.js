@@ -8,18 +8,19 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import {
-  listProductDetails,
+  listProductAdmin,
   updateProduct,
   createVariation,
   deleteVariation,
 } from "../actions/productActions";
-import { Categorias } from "../Lists";
+import { novasCategorias } from "../Lists";
 
 function EditProductScreen({ match, history }) {
   const productId = match.params.id;
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
+  const [sub_categories, setSubCategory] = useState([]);
   const [price, setPrice] = useState(0);
   const [promo_price, setPromo_price] = useState(0);
   const [image, setImage] = useState("");
@@ -27,13 +28,22 @@ function EditProductScreen({ match, history }) {
   const [expire, setExpire] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [ficha, setFicha] = useState("");
+  const [carac, setCarac] = useState("");
+  const [como, setComo] = useState("");
+  const [cuidados, setCuidados] = useState("");
+  const [higiene, setHigiene] = useState("");
+  const [recomendacoes, setRecomendacoes] = useState("");
+  const [tags, setTags] = useState("");
+  const [related, setRelated] = useState("");
+  const [similar, setSimilar] = useState("");
   const [uploading, setUploading] = useState(false);
   const [reload, setReload] = useState(false);
 
   const dispatch = useDispatch();
 
-  const productDetails = useSelector((state) => state.productDetails);
-  const { error, loading, product } = productDetails;
+  const productAdmin = useSelector((state) => state.productAdmin);
+  const { error, loading, product } = productAdmin;
 
   const productUpdate = useSelector((state) => state.productUpdate);
   const { error: errorUpdate, loading: loadingUpdate, success } = productUpdate;
@@ -64,20 +74,20 @@ function EditProductScreen({ match, history }) {
 
     if (success) {
       dispatch({ type: "PRODUCT_UPDATE_RESET" });
-      dispatch(listProductDetails(productId));
+      dispatch(listProductAdmin(productId));
     }
 
     if (successVariation) {
       setReload(false);
-      console.log(reload);
       history.push(`/admin/product/${productId}/${createdVariation.id}/edit`);
     } else {
       if (product._id !== Number(productId) || !reload) {
-        dispatch(listProductDetails(productId));
+        dispatch(listProductAdmin(productId));
         setReload(true);
       } else {
         setName(product.name);
         setCategory(product.category);
+        setSubCategory(product.sub_categories);
         setPrice(product.price);
         setPromo_price(product.promo_price);
         setImage(product.image);
@@ -85,6 +95,15 @@ function EditProductScreen({ match, history }) {
         setExpire(product.expire);
         setCountInStock(product.countInStock);
         setDescription(product.description);
+        setFicha(product.ficha);
+        setCarac(product.carac);
+        setComo(product.como);
+        setCuidados(product.cuidados);
+        setHigiene(product.higiene);
+        setRecomendacoes(product.recomendacoes);
+        setTags(product.tags);
+        setRelated(product.related);
+        setSimilar(product.similar);
       }
     }
   }, [
@@ -106,6 +125,7 @@ function EditProductScreen({ match, history }) {
         _id: productId,
         name,
         category,
+        sub_categories,
         price,
         type,
         expire,
@@ -113,6 +133,15 @@ function EditProductScreen({ match, history }) {
         image,
         countInStock,
         description,
+        ficha,
+        carac,
+        como,
+        cuidados,
+        higiene,
+        recomendacoes,
+        tags,
+        related,
+        similar,
       })
     );
   };
@@ -153,7 +182,7 @@ function EditProductScreen({ match, history }) {
   const deleteHandler = (pk, id) => {
     if (window.confirm("Você tem certeza que deseja excluir essa variação?")) {
       dispatch(deleteVariation(pk, id));
-      dispatch(listProductDetails(productId));
+      dispatch(listProductAdmin(productId));
     }
   };
 
@@ -175,25 +204,22 @@ function EditProductScreen({ match, history }) {
         </Col>
       </Row>
       <Row>
-        <Col md={5}>
-          <h1>Editar Produto</h1>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
 
-          {loadingUpdate && <Loader />}
-          {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
+        {loadingDelete && <Loader />}
+        {errorDelete && <Message variant="danger">{errorDelete}</Message>}
 
-          {loadingDelete && <Loader />}
-          {errorDelete && <Message variant="danger">{errorDelete}</Message>}
-
-          {loadingVariation && <Loader />}
-          {errorVariation && (
-            <Message variant="danger">{errorVariation}</Message>
-          )}
-
-          {loading ? (
-            <Loader />
-          ) : error ? (
-            <Message variant="danger">{error}</Message>
-          ) : (
+        {loadingVariation && <Loader />}
+        {errorVariation && <Message variant="danger">{errorVariation}</Message>}
+      </Row>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <Row>
+          <Col md={6}>
             <Form onSubmit={submitHandler}>
               <Form.Group control="name">
                 <Form.Label>Nome</Form.Label>
@@ -240,13 +266,37 @@ function EditProductScreen({ match, history }) {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  {Categorias.map((categoria) => (
-                    <option key={categoria} value={categoria}>
+                  {Object.keys(novasCategorias).map((categoria, index) => (
+                    <option key={index} value={categoria}>
                       {categoria}
                     </option>
                   ))}
                 </Form.Control>
               </Form.Group>
+
+              {category && (
+                <Form.Group control="sub-category">
+                  <Form.Label>Sub Categorias</Form.Label>
+                  <Form.Control
+                    as="select"
+                    multiple
+                    value={sub_categories}
+                    onChange={(e) =>
+                      setSubCategory(
+                        [].slice
+                          .call(e.target.selectedOptions)
+                          .map((item) => item.value)
+                      )
+                    }
+                  >
+                    {novasCategorias[category].map((sub, index) => (
+                      <option key={index} value={sub}>
+                        {sub}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+              )}
 
               <Form.Group control="price">
                 <Form.Label>Preço</Form.Label>
@@ -296,57 +346,143 @@ function EditProductScreen({ match, history }) {
                 ></Form.Control>
               </Form.Group>
 
+              <Form.Group control="ficha">
+                <Form.Label>Ficha Técnica</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  value={ficha}
+                  onChange={(e) => setFicha(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group control="carac">
+                <Form.Label>Características</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  value={carac}
+                  onChange={(e) => setCarac(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group control="howto">
+                <Form.Label>Como Usar</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  value={como}
+                  onChange={(e) => setComo(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group control="cuidados">
+                <Form.Label>Cuidados e Precauções</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  value={cuidados}
+                  onChange={(e) => setCuidados(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group control="higiene">
+                <Form.Label>Como Higienizar</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  value={higiene}
+                  onChange={(e) => setHigiene(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group control="recomendacoes">
+                <Form.Label>Recomendações</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  value={recomendacoes}
+                  onChange={(e) => setRecomendacoes(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group control="tag">
+                <Form.Label>Tags</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={tags}
+                  onChange={(e) => setTags(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group control="relacionados">
+                <Form.Label>Relacionados</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={related}
+                  onChange={(e) => setRelated(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group control="similar">
+                <Form.Label>Similares</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={similar}
+                  onChange={(e) => setSimilar(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
               <Col className="text-right">
                 <Button className="text-danger" type="submit" variant="primary">
                   Atualizar
                 </Button>
               </Col>
             </Form>
-          )}
-        </Col>
-        <Col md={7}>
-          <h1>Variações</h1>
+          </Col>
 
-          <Table striped bordered hover className="table-sm">
-            <thead>
-              <th className="text-center">Nome</th>
-              <th className="text-center">Preço</th>
-              <th className="text-center">P. Promocional</th>
-              <th className="text-center">Estoque</th>
-              <th></th>
-            </thead>
+          <Col md={6}>
+            <h1>Variações</h1>
+            <Table striped bordered hover className="table-sm">
+              <thead>
+                <th className="text-center">Nome</th>
+                <th className="text-center">Preço</th>
+                <th className="text-center">P. Promocional</th>
+                <th className="text-center">Estoque</th>
+                <th></th>
+              </thead>
 
-            <tbody>
-              {product.variations.map((variation) => (
-                <tr>
-                  <td className="text-center">{variation.name}</td>
-                  <td className="text-center">{variation.price}</td>
-                  <td className="text-center">{variation.promo_price}</td>
-                  <td className="text-center">{variation.countInStock}</td>
-                  <td className="text-center">
-                    <LinkContainer
-                      to={`/admin/product/${productId}/${variation.id}/edit`}
-                    >
-                      <Button id="dropdown-danger" className="btn-sm">
-                        Editar
+              <tbody>
+                {product.variations.map((variation) => (
+                  <tr>
+                    <td className="text-center">{variation.name}</td>
+                    <td className="text-center">{variation.price}</td>
+                    <td className="text-center">{variation.promo_price}</td>
+                    <td className="text-center">{variation.countInStock}</td>
+                    <td className="text-center">
+                      <LinkContainer
+                        to={`/admin/product/${productId}/${variation.id}/edit`}
+                      >
+                        <Button id="dropdown-danger" className="btn-sm">
+                          Editar
+                        </Button>
+                      </LinkContainer>
+                      <Button
+                        className="btn-sm"
+                        variant="light"
+                        onClick={() => {
+                          deleteHandler(productId, variation.id);
+                        }}
+                      >
+                        <i id="honey" className="fas fa-trash"></i>
                       </Button>
-                    </LinkContainer>
-                    <Button
-                      className="btn-sm"
-                      variant="light"
-                      onClick={() => {
-                        deleteHandler(productId, variation.id);
-                      }}
-                    >
-                      <i id="honey" className="fas fa-trash"></i>
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

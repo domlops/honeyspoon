@@ -23,19 +23,19 @@ export const listProducts =
     }
   };
 
-export const listTopProducts = () => async (dispatch) => {
+export const listProductAdmin = (id) => async (dispatch) => {
   try {
-    dispatch({ type: "PRODUCT_TOP_REQUEST" });
+    dispatch({ type: "PRODUCT_ADMIN_REQUEST" });
 
-    const { data } = await axios.get(`/api/products/top/`);
+    const { data } = await axios.get(`/api/products/${id}/admin`);
 
     dispatch({
-      type: "PRODUCT_TOP_SUCCESS",
+      type: "PRODUCT_ADMIN_SUCCESS",
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: "PRODUCT_TOP_FAIL",
+      type: "PRODUCT_ADMIN_FAIL",
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

@@ -20,7 +20,7 @@ export const productListReducer = (state = { products: [] }, action) => {
 };
 
 export const productDetailsReducer = (
-  state = { product: { reviews: [], variations: [{}] } },
+  state = { product: { variations: [{}], related: [{}], similar: [{}] } },
   action
 ) => {
   switch (action.type) {
@@ -187,15 +187,18 @@ export const productReviewCreateReducer = (state = {}, action) => {
   }
 };
 
-export const productTopRatedReducer = (state = { products: [] }, action) => {
+export const productAdminReducer = (
+  state = { product: { variations: [{}], sub_categories: [] } },
+  action
+) => {
   switch (action.type) {
-    case "PRODUCT_TOP_REQUEST":
-      return { loading: true, products: [] };
+    case "PRODUCT_ADMIN_REQUEST":
+      return { loading: true, ...state };
 
-    case "PRODUCT_TOP_SUCCESS":
-      return { loading: false, products: action.payload };
+    case "PRODUCT_ADMIN_SUCCESS":
+      return { loading: false, product: action.payload };
 
-    case "PRODUCT_TOP_FAIL":
+    case "PRODUCT_ADMIN_FAIL":
       return { loading: false, error: action.payload };
 
     default:

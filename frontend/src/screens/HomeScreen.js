@@ -15,13 +15,35 @@ function HomeScreen({ history }) {
   const { error, loading, products, page, pages } = productList;
 
   let keyword = history.location.search;
+
   useEffect(() => {
-    dispatch(listProducts(keyword));
+    !keyword
+      ? dispatch(listProducts("/?search=home&page=1"))
+      : dispatch(listProducts(keyword));
   }, [dispatch, keyword]);
 
   return (
     <div>
-      {!keyword && <HomeCarousel />}
+      {!keyword && (
+        <div>
+          <Col md={12}>
+            <Card className="text-danger bg-primary my-2 rounded">
+              <Card.Link
+                href="https://api.whatsapp.com/message/3B7EYFQSVWKQO1?autoload=1&app_absent=0"
+                target="_blank"
+              >
+                <Card.Img src="https://honeyspoon-bucket.s3.sa-east-1.amazonaws.com/(82)+9+8131+4346.png" />
+              </Card.Link>
+            </Card>
+          </Col>
+          <HomeCarousel />
+          <Col md={12}>
+            <Card as="h3" className="text-danger bg-primary my-2 rounded">
+              <Card.Img src="https://honeyspoon-bucket.s3.sa-east-1.amazonaws.com/barra.png" />
+            </Card>
+          </Col>
+        </div>
+      )}
       <CategoryBar />
       {loading ? (
         <Loader />
@@ -29,39 +51,6 @@ function HomeScreen({ history }) {
         <Message variant="danger">{error}</Message>
       ) : (
         <div>
-          {keyword === "?search=Bazar&page=1" && (
-            <div>
-              <Row>
-                <Col md={12}>
-                  <Card
-                    as="h1"
-                    className="text-danger text-center bg-primary my-5"
-                  >
-                    <Card.Body>Bazar</Card.Body>
-                  </Card>
-                </Col>
-              </Row>
-              <Row>
-                <Col class="text-center">
-                  <h5>
-                    O <em id="about-text">Bazar</em> é uma alternativa criada
-                    por nós para que você possa ter um acesso mais barato a
-                    alguns produtos e também para que a gente mantenha nossa
-                    proposta de sermos mais ecológicos. Aqui você vai encontrar
-                    algumas peças que a embalagem veio estragada, mas o produto
-                    se mantém apto para uso (substituíremos por uma linda
-                    embalagem, não se preocupe), produtos que violamos o lacre
-                    para produzir algum conteúdo para o instagram, produtos com
-                    pequenas avarias ou ultimas unidades que não voltarão para o
-                    estoque. Leia a descrição do produto do seu interesse com
-                    atenção, nela você encontrará o motivo para ele estar aqui
-                    para que você possa adquirí-lo com consciência do que estará
-                    sendo entregue. Aproveite!
-                  </h5>
-                </Col>
-              </Row>
-            </div>
-          )}
           <Row>
             {products.map((product) => (
               <Col key={product._id} sm={6} md={6} lg={4} xl={3}>

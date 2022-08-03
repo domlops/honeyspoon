@@ -25,11 +25,10 @@ function Header() {
           <LinkContainer to="/">
             <Navbar.Brand>
               <img
-                alt=""
-                src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/logo-header.svg"
+                src="https://honeyspoon-bucket.s3.sa-east-1.amazonaws.com/Logo-super-horizontal-coral.png"
                 width="300"
                 height="30"
-                className=""
+                alt="rect-logo"
               />{" "}
             </Navbar.Brand>
           </LinkContainer>

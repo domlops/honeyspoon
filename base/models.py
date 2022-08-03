@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from localflavor.br.models import BRCPFField
 from django.contrib.auth.models import (
@@ -66,11 +67,18 @@ class Product(models.Model):
     image = models.ImageField(null=True, blank=True, default='/mel.png')
     expire = models.CharField(default='', max_length=10)
     category = models.CharField(max_length=100, null=True, blank=True)
+    sub_categories = models.JSONField(default=list)
     type = models.CharField(default='U', max_length=1, choices=(
         ('U', 'Unique'),
         ('V', 'Variation')
     ))
     description = models.TextField(null=True, blank=True)
+    ficha = models.TextField(null=True, blank=True)
+    carac = models.TextField(null=True, blank=True)
+    como = models.TextField(null=True, blank=True)
+    cuidados = models.TextField(null=True, blank=True)
+    higiene = models.TextField(null=True, blank=True)
+    recomendacoes = models.TextField(null=True, blank=True)
     rating = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
     numReviews = models.IntegerField(null=True, blank=True, default=0)
@@ -82,6 +90,9 @@ class Product(models.Model):
         null=True, blank=True, default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
+    tags = models.JSONField(default=list)
+    related = models.JSONField(default=list)
+    similar = models.JSONField(default=list)
 
     def __str__(self):
         return self.name

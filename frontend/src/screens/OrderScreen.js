@@ -21,7 +21,7 @@ import {
 function OrderScreen({ match, history }) {
   const orderId = match.params.id;
   const dispatch = useDispatch();
-  
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, error, loading } = orderDetails;
 
@@ -115,18 +115,13 @@ function OrderScreen({ match, history }) {
                     Pague através do QR Code
                   </ListGroup.Item>
                   <Image
-                    src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/imagem_2021-06-02_170048.png"
+                    src="https://honeyspoon-bucket.s3.sa-east-1.amazonaws.com/imagem_2022-08-01_104844906.png"
                     alt="pix"
                     width="250"
                     rounded
                   />
-                  <ListGroup.Item
-                    action
-                    href="https://nubank.com.br/pagar/ox0ih/kWqwsslpx2"
-                    target="_blank"
-                    className="mb-3"
-                  >
-                    Ou através do Link
+                  <ListGroup.Item className="mb-3">
+                    Ou através da chave: umacolherdemel@outlook.com
                   </ListGroup.Item>
                 </ListGroup>
               )}

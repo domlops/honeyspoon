@@ -9,23 +9,18 @@ import {
   Card,
   Form,
 } from "react-bootstrap";
-import Rating from "../components/Rating";
+import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import CategoryBar from "../components/CategoryBar";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  listProductDetails,
-  createProductReview,
-} from "../actions/productActions";
+import { listProductDetails, listProducts } from "../actions/productActions";
 import { addToCart } from "../actions/cartActions";
 
 function ProductScreen({ match, history }) {
   const productId = match.params.id;
 
   const [vary, setVary] = useState(0);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
   const [add, setAdd] = useState(false);
 
   const dispatch = useDispatch();
@@ -34,38 +29,23 @@ function ProductScreen({ match, history }) {
   const { loading, error, product } = productDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
 
-  const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const {
-    loading: loadingReview,
-    error: errorReview,
-    success,
-  } = productReviewCreate;
+  const productList = useSelector((state) => state.productList);
+  const { products } = productList;
+
+  const keyword = "/?search=essentials&page=1";
 
   useEffect(() => {
-    if (success) {
-      setRating(0);
-      setComment("");
-      dispatch({ type: "PRODUCT_CREATE_REVIEW_RESET" });
-    }
-
     dispatch(listProductDetails(productId));
-  }, [dispatch, match, success, productId]);
+  }, [dispatch, match, keyword, productId]);
+
+  useEffect(() => {
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   const addToCartHandler = () => {
     dispatch(addToCart(productId, vary));
     setAdd(true);
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      createProductReview(productId, {
-        rating,
-        comment,
-      })
-    );
   };
 
   const formatPrice = (price) => {
@@ -74,9 +54,12 @@ function ProductScreen({ match, history }) {
     }
   };
 
+  const excludeList = ["DOCES", "LINGERIES", "COLEÇÕES"];
+  const checkCategory = () => excludeList.includes(product.category);
+
   return (
     <div>
-      <Link to="/" className="text-danger btn btn-primary my-4">
+      <Link to="/" className="text-danger btn btn-primary my-4 rounded">
         Voltar
       </Link>
       {loading ? (
@@ -86,23 +69,14 @@ function ProductScreen({ match, history }) {
       ) : (
         <div>
           <CategoryBar />
-          <Row className="mt-5">
+          <Row className="mt-3 mx-1">
+            <h3>{product.name}</h3>
+          </Row>
+          <Row className="mt-3">
             <Col md={5}>
               <Image src={product.image} alt={product.name} fluid />
             </Col>
             <Col md={7}>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <h3>{product.name}</h3>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Rating
-                    value={product.rating}
-                    text={`de ${product.numReviews} avaliações`}
-                    color={"#eea9ad"}
-                  />
-                </ListGroup.Item>
-              </ListGroup>
               {product.variations.map((variation) => (
                 <Card key={variation.id} className="rounded">
                   <Row>
@@ -110,6 +84,7 @@ function ProductScreen({ match, history }) {
                       <Card.Img
                         src={variation.image}
                         style={{ width: "10rem" }}
+                        className="ml-3"
                       />
                     </Col>
                     <Col key={variation.name}>
@@ -160,7 +135,7 @@ function ProductScreen({ match, history }) {
                         <Col>
                           <Button
                             onClick={addToCartHandler}
-                            className="text-danger btn-block"
+                            className="rounded text-danger btn-block"
                             disabled={
                               product.variations[vary].countInStock < 1
                                 ? true
@@ -168,7 +143,8 @@ function ProductScreen({ match, history }) {
                             }
                             type="button"
                           >
-                            Adicionar ao Carrinho
+                            Comprar{" "}
+                            <i className="fas fa-shopping-cart pr-1 text-danger"></i>
                           </Button>
                         </Col>
                       </Row>
@@ -183,101 +159,99 @@ function ProductScreen({ match, history }) {
               </Card>
             </Col>
           </Row>
+
           <Row>
             <Col md={12}>
-              <Card as="h3" className="text-danger bg-primary my-5">
+              <Card as="h3" className="rounded text-light bg-secondary mt-5">
                 <Card.Body>Descrição</Card.Body>
               </Card>
             </Col>
             <Col id="lb" className="mx-3">
-              <p>{product.description}</p>
+              <p className="mt-3">{product.description}</p>
+              {checkCategory() || (
+                <div>
+                  <h5 className="text-danger">♡ Ficha Técnica ♡</h5>
+                  <p>{product.ficha}</p>
+                  <h5 className="text-danger">♡ Características ♡</h5>
+                  <p>{product.carac}</p>
+                  <h5 className="text-danger">♡ Como Usar ♡</h5>
+                  <p>{product.como}</p>
+                  <h5 className="text-danger">♡ Como Higienizar ♡</h5>
+                  <p>{product.higiene}</p>
+                  <h5 className="text-danger">♡ Cuidados e Precauções ♡</h5>
+                  <p>{product.cuidados}</p>
+                  <h5 className="text-danger">♡ Recomendações ♡</h5>
+                  <p>{product.recomendacoes}</p>
+                </div>
+              )}
             </Col>
           </Row>
+          {loading ? (
+            <Loader />
+          ) : (
+            <div>
+              <Row>
+                <Col md={12}>
+                  <Card
+                    as="h3"
+                    className="rounded text-light bg-secondary mt-5"
+                  >
+                    <Card.Body>Produtos Relacionados</Card.Body>
+                  </Card>
+                </Col>
+              </Row>
 
-          <Row>
-            <Col md={12}>
-              <Card as="h3" className="text-danger bg-primary my-5">
-                <Card.Body>Avaliações dos Clientes</Card.Body>
-              </Card>
-            </Col>
-            <Col md={6} className="mt-4">
-              {product.reviews.length === 0 && (
-                <Message variant="info">
-                  Esse produto ainda não foi avaliado
-                </Message>
+              <Row>
+                {product.related.map((obj) => (
+                  <Col key={obj._id} sm={4} md={4} lg={4} xl={4}>
+                    <Product product={obj} />
+                  </Col>
+                ))}
+              </Row>
+
+              {product.category !== "Chocolates" && (
+                <div>
+                  <Row>
+                    <Col md={12}>
+                      <Card
+                        as="h3"
+                        className="rounded text-light bg-secondary mt-5"
+                      >
+                        <Card.Body>Essenciais</Card.Body>
+                      </Card>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    {products.map((product) => (
+                      <Col key={product._id} sm={3} md={3} lg={3} xl={3}>
+                        <Product product={product} />
+                      </Col>
+                    ))}
+                  </Row>
+                </div>
               )}
 
-              <ListGroup variant="flush">
-                {product.reviews.map((review) => (
-                  <ListGroup.Item key={review._id}>
-                    <strong>{review.name}</strong>
-                    <p>
-                      ({review.createdAt.substring(0, 10).replace(/-/g, "/")})
-                    </p>
-                    <Rating value={review.rating} color="#eea9ad" />
+              <Row>
+                <Col md={12}>
+                  <Card
+                    as="h3"
+                    className="rounded text-light bg-secondary mt-5"
+                  >
+                    <Card.Body>Você Também Pode Gostar</Card.Body>
+                  </Card>
+                </Col>
+              </Row>
 
-                    <p>{review.comment}</p>
-                  </ListGroup.Item>
+              <Row>
+                {product.similar.map((obj) => (
+                  <Col key={obj._id} sm={4} md={4} lg={4} xl={4}>
+                    <Product product={obj} />
+                  </Col>
                 ))}
-
-                <ListGroup.Item>
-                  <h4>Deixe a sua avaliação</h4>
-
-                  {loadingReview && <Loader />}
-                  {success && (
-                    <Message variant="success">Avaliação submetida</Message>
-                  )}
-                  {errorReview && (
-                    <Message variant="danger">{errorReview}</Message>
-                  )}
-
-                  {userInfo ? (
-                    <Form onSubmit={submitHandler}>
-                      <Form.Group controlId="rating">
-                        <Form.Label>Nota</Form.Label>
-                        <Form.Control
-                          as="select"
-                          value={rating}
-                          onChange={(e) => setRating(e.target.value)}
-                        >
-                          <option value="">Selecione...</option>
-                          <option value="1">1 - Fraco</option>
-                          <option value="2">2 - Funciona</option>
-                          <option value="3">3 - Bom</option>
-                          <option value="4">4 - Muito Bom</option>
-                          <option value="5">5 - Excelente!</option>
-                        </Form.Control>
-                      </Form.Group>
-
-                      <Form.Group controlId="comment">
-                        <Form.Label>Avaliação</Form.Label>
-                        <Form.Control
-                          as="textarea"
-                          row="5"
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-
-                      <Button
-                        disabled={loadingReview}
-                        className="text-danger"
-                        type="submit"
-                        variant="primary"
-                      >
-                        Enviar
-                      </Button>
-                    </Form>
-                  ) : (
-                    <Message variant="info">
-                      <Link to="/login">Entre</Link> para poder deixar sua
-                      avaliação
-                    </Message>
-                  )}
-                </ListGroup.Item>
-              </ListGroup>
-            </Col>
-          </Row>
+              </Row>
+            </div>
+          )}
         </div>
       )}
     </div>

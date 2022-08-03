@@ -28,7 +28,7 @@ function SearchBox() {
         <Button
           type="submit"
           variant="outline-danger"
-          className="text-danger p-2"
+          className="text-danger p-2 rounded"
         >
           Pesquisar
         </Button>

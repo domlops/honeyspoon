@@ -12,15 +12,15 @@ function LogisticaScreen() {
         </Col>
       </Row>
       <Row>
-        <Col md={12}>
+        <Col className="mx-3">
           <p>
             O Ministério do Meio Ambiente define que “a logística reversa é um
             instrumento de desenvolvimento econômico e social caracterizado por
             um conjunto de ações, procedimentos e meios destinados a viabilizar
-            a coleta e a restituição […] “, calma! Esse tanto de palavras
-            sofisticadas não são tudo isso que você imagina! Aqui nós vamos
-            mostrar na prática como você pode fazer parte dessa logística e
-            ainda ter várias vantagens
+            a coleta e a restituição […] “, mas calma, Bee! Esse tanto de
+            palavras sofisticadas não são tudo isso que você imagina! Aqui nós
+            vamos mostrar na prática como você pode fazer parte dessa logística
+            e ainda ter várias vantagens
           </p>
           <p>
             Para que você possa comprar e consumir um produto, existe toda uma

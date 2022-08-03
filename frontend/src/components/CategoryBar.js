@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Nav } from "react-bootstrap";
+import { Nav, NavDropdown } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { novasCategorias } from "../Lists";
 
 function CategoryBar() {
   const [shop, setShop] = useState(false);
@@ -9,6 +10,7 @@ function CategoryBar() {
 
   const clickHandler = (category) => {
     history.push(`/?search=${category}&page=1`);
+    setShop(false);
   };
 
   const bar = () => {
@@ -24,94 +26,59 @@ function CategoryBar() {
       <Nav fill variant="tabs" className="mt-3">
         <Nav.Link onClick={() => bar()}>
           <img
-            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/mel-nobg.png"
-            width="100"
+            src="https://honeyspoon-bucket.s3.sa-east-1.amazonaws.com/Logo-horizontal-vinho.png"
+            width="200"
             height="100"
             alt="sex-shop"
           />
         </Nav.Link>
 
-        <Nav.Link
-          href="https://portal.masterlove.com.br/profissional/1620876086819x131650251047305220"
-          target="_blank"
-        >
+        <Nav.Link href="#/papo">
           <img
-            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/mlove.png"
-            width="100"
+            src="https://honeyspoon-bucket.s3.sa-east-1.amazonaws.com/Papo+de+Mel.png"
+            width="200"
             height="100"
             alt="mlove"
           />
         </Nav.Link>
 
-        <Nav.Link href="#/inciclo">
-          <img
-            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/inciclo.png"
-            width="100"
-            height="100"
-            alt="inciclo"
-          />
-        </Nav.Link>
-
         <Nav.Link href="#/colmeia">
           <img
-            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/Colmeia+Neon.svg"
-            width="100"
+            src="https://honeyspoon-bucket.s3.sa-east-1.amazonaws.com/Colmeia.png"
+            width="200"
             height="100"
             alt="colmeia"
-          />
-        </Nav.Link>
-
-        <Nav.Link href="#/aroma-honeyspoon">
-          <img
-            src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/Chocolates.svg"
-            width="100"
-            height="100"
-            alt="chocs"
           />
         </Nav.Link>
       </Nav>
 
       {shop && (
         <Nav
-          justify
-          rounded
+          fill
           variant="tabs"
           className="mt-3"
           onSelect={(eventKey) => clickHandler(eventKey)}
         >
-          <Nav.Link eventKey="Vibradores">
-            <h6>Vibradores</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Bolinhas">
-            <h6>Bolinhas</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Géis">
-            <h6>Géis</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Dildos e Plugs">
-            <h6>Plugs & Dildos</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Fetiche">
-            <h6>Fetiche</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Anéis Penianos">
-            <h6>Anéis Penianos</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Lingerie">
-            <h6>Lingerie</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Massageadores">
-            <h6>Massageadores</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Cuidados">
-            <h6>Cuidados</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Outros">
-            <h6>Outros</h6>
-          </Nav.Link>
-          <Nav.Link eventKey="Bazar">
-            <h6>Bazar</h6>
-          </Nav.Link>
+          {Object.keys(novasCategorias).map((category, index) => (
+            <NavDropdown key={index} title={category} id="navDropdown">
+              {novasCategorias[category].map((sub, i) => (
+                <NavDropdown.Item
+                  key={i}
+                  id="dropdownItem"
+                  eventKey={sub.toLowerCase()}
+                >
+                  {sub}
+                </NavDropdown.Item>
+              ))}
+              <NavDropdown.Divider />
+              <NavDropdown.Item
+                id="dropdownItem"
+                eventKey={category.toLowerCase()}
+              >
+                VER TODOS
+              </NavDropdown.Item>
+            </NavDropdown>
+          ))}
         </Nav>
       )}
     </div>

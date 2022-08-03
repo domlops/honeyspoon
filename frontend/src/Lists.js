@@ -50,19 +50,16 @@ export const Bairros = [
 ];
 
 export const Categorias = [
-  "Bolinhas",
-  "Géis",
-  "Vibradores",
-  "Dildos e Plugs",
-  "Fetiche",
-  "Anéis Penianos",
-  "Massageadores",
-  "Lingerie",
+  "Vibros",
+  "Plugs & Dildos",
+  "Anéis e Masturbadores",
+  "Cosméticos",
   "Cuidados",
-  "Chocolates",
-  "Inciclo",
+  "Acessórios",
+  "Lingeries",
+  "Coleções",
+  "Doces",
   "Outros",
-  "Bazar",
 ];
 
 export const Cidades = [
@@ -114,3 +111,60 @@ export const Colmeia = [
     link: "https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=2c93808479c587f30179c925d7f90344",
   },
 ];
+
+export const novasCategorias = {
+  VIBROS: [
+    "BULLET",
+    "CAPSULA",
+    "COM CONTROLE",
+    "DUPLO",
+    "MASSAGEADOR",
+    "PERSONAL",
+    "RABBIT",
+    "SUGADORES",
+    "PENETRÁVEL",
+    "PONTO G",
+  ],
+
+  "PLUGS E DILDOS": [
+    "ANEL COMPANHEIRO",
+    "DUPLO",
+    "COM BASE",
+    "SEM BASE",
+    "COM VENTOSA",
+    "COM RABINHO",
+    "ESTIMULADOR DE PROSTATA",
+    "PLUG BALL",
+    "PLUG DE BORRACHA",
+    "PLUG JOIA",
+  ],
+
+  "ANEIS E MASTURBADORES": [
+    "ANEL COMPANHEIRO",
+    "ANEIS STRETCH",
+    "DEDEIRAS",
+    "EGGS",
+    "PARA PENIS",
+  ],
+
+  COMESTICOS: [
+    "BEIJAVEIS",
+    "LUBRIFICANTES",
+    "PARA ANUS",
+    "PARA PENIS",
+    "PARA VULVA",
+    "VIBRADOR LIQUIDO",
+  ],
+
+  CUIDADOS: ["HIGIENE", "PARA MENSTRUAÇÃO", "PRESERVATIVOS"],
+
+  LINGERIES: ["CALCINHA", "CINTA-LIGAS", "HARNESS", "MEIAS"],
+
+  ACESSORIOS: ["ALGEMAS", "CHICOTES", "CORDAS", "GRAMPO DE MAMILO"],
+
+  COLEÇÕES: ["BENDITA VULVA"],
+
+  DOCES: ["BOLOS", "BRIGADEIROS", "CHOCOLATES", "TRUFAS"],
+
+  OUTROS: ["PARA LIMPEZA", "PILHAS", "TALCOS"],
+};

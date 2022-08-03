@@ -9,7 +9,7 @@ urlpatterns = [
     path('upload/', views.uploadImage, name='upload-product'),
 
     path('<str:pk>/reviews/', views.createReview, name='product-reviews'),
-    path('top/', views.getTopProducts, name='top-products'),
+    path('<str:pk>/admin', views.getProductAdmin, name='product-admin'),
     path('<str:pk>/', views.getProduct, name='product'),
     path('<str:pk>/<str:id>', views.getVariation, name='variation'),
 
