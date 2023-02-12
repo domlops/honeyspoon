@@ -23,7 +23,7 @@ function CategoryBar() {
 
   return (
     <div>
-      <Nav fill variant="tabs" className="mt-3">
+      <Nav justify variant="tabs" className="mt-3">
         <Nav.Link onClick={() => bar()}>
           <img
             src="https://honeyspoon-bucket.s3.sa-east-1.amazonaws.com/Logo-horizontal-vinho.png"

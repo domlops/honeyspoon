@@ -14,6 +14,7 @@ def getProducts(request):
     essentials = [159, 10, 197, 189]
     home_list = [206, 176, 213, 172, 180, 193, 173, 209, 182, 135, 184, 214]
     temp=[76,77,210]
+    new=[216,217,218, 219, 220, 221, 222, 223, 224, 225]
     categories = Product.objects.values_list('category', flat=True).distinct()
     categories = [x.lower() for x in categories]
     subs = Product.objects.values_list('sub_categories', flat=True).distinct()
@@ -33,6 +34,8 @@ def getProducts(request):
         products = Product.objects.filter(_id__in=essentials).order_by("-countInStock")
     elif query == "home":
         products = Product.objects.filter(_id__in=home_list).order_by("-_id")
+    elif query == "new":
+        products = Product.objects.filter(_id__in=new).order_by("-_id")
     else:
         products = Product.objects.filter(
             tags__icontains=query).order_by("_id")

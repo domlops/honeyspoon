@@ -30,7 +30,7 @@ function HomeCarousel() {
       </Carousel.Item>
 
       <Carousel.Item>
-        <Link to="/colmeia">
+        <Link to="/?search=new&page=1">
           <Image
             className="d-block w-100"
             src="https://honeyspoon-bucket.s3-sa-east-1.amazonaws.com/4.svg"
